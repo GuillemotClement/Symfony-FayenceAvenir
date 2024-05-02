@@ -1,0 +1,31 @@
+header {
+  background-color: var(--bg-primary);
+  color: var(--text-light);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow);
+  img {
+    height: 9rem;
+  }
+  a {
+    color: var(--text-light);
+  }
+  .nav {
+    display: flex;
+    li {
+      margin-right: 1.5rem;
+      transform: opacity 0.3s;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+  .action {
+    a {
+      margin-right: 1.5rem;
+    }
+  }
+}

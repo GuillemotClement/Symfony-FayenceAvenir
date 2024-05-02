@@ -1,0 +1,12 @@
+.btn {
+  padding: 1rem 1rem;
+  background: white;
+  cursor: pointer;
+  color: var(--text);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 0.8;
+  }
+}
