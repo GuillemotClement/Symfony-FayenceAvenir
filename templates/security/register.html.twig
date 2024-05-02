@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SecurityController!{% endblock %}
+
+{% block body %}
+ <div class="content">
+    <h2 class="pb-30">Inscription</h2>
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <button class="btn btn-primary mr-10">Inscription</button>
+    <small>
+      {# <a href="{{ path('login') }}">Vous avez déjà un compte ?</a> #}
+    </small>
+    {{ form_end(form )}}
+  </div>
+{% endblock %}
