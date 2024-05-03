@@ -29,7 +29,7 @@ class SecurityController extends AbstractController
         $userForm->handleRequest($request);
         if($userForm->isSubmitted() && $userForm->isValid()){
             $hash = $passwordHasher->hashPassword($user, $user->getPassword());
-            $user->getPassword($hash);
+            $user->setPassword($hash);
             $em->persist($user);
             $em->flush();
             $this->addFlash('success', 'Inscription réussie');
@@ -43,11 +43,12 @@ class SecurityController extends AbstractController
     #[Route('/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils)
     {
-        if($this->getUser()){
-            return $this->redirectToRoute('home');
-        }
+        // if($this->getUser()){
+        //     return $this->redirectToRoute('home');
+        // }
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
+        
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error

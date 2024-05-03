@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="content article">
+
+    <a href="{{ path('article_new')}}">Nouvel article</a>
+    <div class="">
+        <h1>Blog</h1>
+        {% for article in articles %}
+            <div class="article-ctn border">
+                <h2 class="article-title">{{ article.title }}</h2>
+                <img class="article-ctn-picture" src="{{ article.picture }}" alt="">
+                <p><span class="article-author">{{ article. author }}</span> - <span class='article-category'>{{ article.category }}</span></p>
+                <p class="article-content">{{ article.content }}</p>
+            </div> 
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+

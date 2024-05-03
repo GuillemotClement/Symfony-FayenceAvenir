@@ -1,17 +1,18 @@
 <header class="">
   <div class="logo">
-    <img src="{{ asset('build/images/logo.png')}}" alt="logo fayence avenir">
+    <a href="{{path('home')}}">
+      <img src="{{ asset('build/images/logo.png')}}" alt="logo fayence avenir">
+    </a>
   </div>
   <ul class="nav">
-    <li><a href="">Articles</a></li>
-    <li><a href="">Agenda</a></li>
-    <li><a href="">Adhérent</a></li>
+    <li class="mr-5"><a href="{{ path('article_show') }}">Blog</a></li>
+    <li><a href="">Evènements</a></li>
     <li><a href="">A propos</a></li>
   </ul>
   <div class="action">
-    <a href="{{ path('register') }}" class="btn">Inscription</a>  
-    <a href="{{ path('login') }}" class="btn">Connection</a>
-    <a href="" class="btn">Deconnection</a>
-    <a href="" class="btn">Profil</a>
+    <a href="{{ path('register') }}" class="btn"><i class="fa-solid fa-database"></i>Inscription</a>  
+    <a href="{{ path('login') }}" class="btn"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+    <a href="" class="btn"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+    <a href="" class="btn"><i class="fa-solid fa-user"></i>Profil</a>
   </div>
 </header>
