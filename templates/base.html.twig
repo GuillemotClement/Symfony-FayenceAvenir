@@ -19,7 +19,9 @@
 	</head>
 <body>
 	{{ include("partials/_header.html.twig") }}
-	{% block body %}{% endblock %}
+	<div class="app-content">
+		{% block body %}{% endblock %}
+	</div>
 	{{ include("partials/_footer.html.twig") }}
 </body>
 </html>

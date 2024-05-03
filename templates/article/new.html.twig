@@ -3,19 +3,11 @@
 {% block title %}{{ parent() }}{% endblock %}
 
 {% block body %}
-
-<form action="">
-  <div class="ctn-form">
-    <label for="">Titre</label>
-    <input type="text" name="" id="">
+  <div class="content">
+    <h1>Nouvel article</h1>
+    {{ form_start(form) }}
+      {{ form_rest(form) }}
+      <button>Valider</button>
+    {{ form_end(form) }}
   </div>
-   <div class="ctn-form">
-    <label for="">Contenu</label>
-    <textarea name="" id="" cols="30" rows="10"></textarea>
-  </div>
-  <div class="ctn-action">
-    <button>Valider</button>
-  </div>
-  
-</form>
 {% endblock %}

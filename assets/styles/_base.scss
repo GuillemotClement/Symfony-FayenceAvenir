@@ -1,5 +1,16 @@
+.app-content {
+  display: flex;
+  max-width: 1400px;
+  margin: auto;
+}
+
 .content {
   flex: 1;
   padding: 1.5rem 2rem;
-  max-width: 1200px;
+  min-width: 1400px;
+}
+
+.separator {
+  border-bottom: 1px solid var(--gray-light);
+  margin: 20px 0;
 }
