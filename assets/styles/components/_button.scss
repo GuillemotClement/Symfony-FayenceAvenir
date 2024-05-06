@@ -7,12 +7,24 @@
   box-shadow: var(--shadow);
   transition: opacity 0.3s;
   text-transform: uppercase;
+  margin-top: 2rem 0;
+  &-small {
+    padding: 0.5rem;
+  }
   &:hover {
     opacity: 0.8;
   }
   &-success {
     background-color: var(--success);
     color: var(--text-light);
+  }
+  &-warning {
+    background: var(--warning);
+    color: white;
+  }
+  &-danger {
+    background-color: var(--danger);
+    color: white;
   }
   &-primary {
     background: var(--primary);

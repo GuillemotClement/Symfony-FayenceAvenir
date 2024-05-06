@@ -1,18 +1,16 @@
 .app-content {
   display: flex;
-  max-width: 1400px;
-  margin: auto;
-}
-
-.content {
+  // max-width: 1400px;
+  // margin: auto;
+  // border: 1px solid red;
   flex: 1;
+  justify-content: center;
   padding: 1.5rem 2rem;
-  min-width: 1400px;
 }
 
 .separator {
   border-bottom: 1px solid var(--gray-light);
-  margin: 20px 0;
+  // margin: 20px 0;
 }
 
 .small {

@@ -6,13 +6,14 @@
   </div>
   <ul class="nav">
     <li class="mr-5"><a href="{{ path('article_show') }}">Blog</a></li>
-    <li><a href="">Evènements</a></li>
-    <li><a href="">A propos</a></li>
+    {# <li><a href="">Evènements</a></li> #}
+    {# <li><a href="">A propos</a></li> #}
   </ul>
   <div class="action">
   {%- if is_granted('IS_AUTHENTICATED_FULLY') -%}
     <a href="{{ path('logout') }}" class="btn"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
     <a href="" class="btn"><i class="fa-solid fa-user"></i>Profil</a>
+    <a href="{{ path('administration') }}" class="btn"><i class="fa-solid fa-pen-nib">Administration</i></a>
   {% else %}
     <a href="{{ path('login') }}" class="btn"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
     <a href="{{ path('register') }}" class="btn"><i class="fa-solid fa-database"></i>Inscription</a>  
