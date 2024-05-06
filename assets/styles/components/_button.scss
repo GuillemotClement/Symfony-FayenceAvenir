@@ -1,16 +1,22 @@
 .btn {
-  padding: 1rem 1rem;
+  padding: 1rem 1.5rem;
   background: white;
   cursor: pointer;
   color: var(--text);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   transition: opacity 0.3s;
+  text-transform: uppercase;
   &:hover {
     opacity: 0.8;
   }
   &-success {
     background-color: var(--success);
     color: var(--text-light);
+  }
+  &-primary {
+    background: var(--primary);
+    color: var(--text-light);
+    border: none;
   }
 }

@@ -4,38 +4,41 @@
 
 {% block body %}
 <div class="content">
-    <h2>Connection</h2>
-    <form action="{{ path('login' ) }}" method="post">
-        <div class="form-row">
-            <label for="email">Email</label>
-            <input type="text" id="email" name="_username" value="">
-        </div>
-        <div class="form-row">
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="_password">
-        </div>
-        <div class="form-row">
-            <label for="remember_me">
-                <input type="checkbox" id="remember_me" name="_remember_me">
-                Se souvenir de moi
-            </label>
-        </div>
+    <div class="form-container">
+        <form action="{{ path('login' ) }}" method="post">
+        <h1>Formulaire de connexion</h1>
+            <div class="form-row">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="_username" value="">
+            </div>
+            <div class="form-row">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="_password">
+            </div>
+            <div class="form-row">
+                <label for="remember_me">
+                    <input type="checkbox" id="remember_me" name="_remember_me">
+                    Se souvenir de moi
+                </label>
+            </div>
 
-        {# Token secu #}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            {# Token secu #}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        {% if error %}
-            <ul class="form-error pb-20">
-                <li>{{ error.messageKey | trans(error.messageData, 'security') }}</li>
-            </ul>
-        {% endif %}
-        <div class="d-flex flex-row">
-            <button class="btn btn-primary">Connection</button>
-        </div>
-        <div class="d-flex flex-column">
-            <a href="" class="small">Vous n'avez pas de compte</a>
-            <a href="" class="small">Mot de passe oublié</a>
-        </div>
-    </form>
+            {% if error %}
+                <ul class="form-error">
+                    <li>{{ error.messageKey | trans(error.messageData, 'security') }}</li>
+                </ul>
+            {% endif %}
+            <div class="action">
+                <button class="btn btn-primary">Connection</button>
+            </div>
+            <div class="separator"></div>
+            <div class="helper">
+                <a href="{{ path('register') }}" class="small">Vous n'avez pas de compte</a>
+                <a href="" class="small">Mot de passe oublié</a>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
