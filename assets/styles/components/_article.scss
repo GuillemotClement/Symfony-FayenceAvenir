@@ -53,3 +53,33 @@
     }
   }
 }
+
+.ctn-article {
+  h1 {
+    text-transform: capitalize;
+    margin: 2rem 0;
+    text-align: center;
+  }
+  img {
+    border-radius: 5px;
+  }
+  .ctn-category {
+    margin: 1.5rem 0;
+    .category {
+      background: var(--gray);
+      padding: 0.5rem 2rem;
+      border-radius: 20px;
+    }
+  }
+  .article-date {
+    margin: 1rem 0;
+  }
+  .article-text {
+    text-align: justify;
+  }
+  .action {
+    margin: 1.5rem 0;
+    display: flex;
+    justify-content: space-around;
+  }
+}

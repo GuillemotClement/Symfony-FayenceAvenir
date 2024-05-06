@@ -8,6 +8,9 @@
 	<div class="sidebar">
 		<ul>
 			<li><a href="#article">Article</a></li>
+			<ul>
+				<li><a href="{{ path('article_new')}}">Ajouter article</a></li>
+			</ul>
 			<div class="separator"></div>
 			<li><a href="">Evènements</a></li>
 		</ul>
@@ -26,7 +29,7 @@
 								<div class="separator"></div>
 								<p>{{ article.content | slice(0, 50|trim) ~ '...' }}</p>
 								<div class="action">
-									<a href="" class="btn btn-primary btn-small">Show</a>
+									<a href="{{ path('article_show', {id: article.id}) }}" class="btn btn-primary btn-small">Show</a>
 									<a href="" class="btn btn-warning btn-small">Editer</a>
 									<a href="{{ path('article_delete', {id: article.id}) }}" class="btn btn-danger btn-small">Supprimer</a>
 								</div>
@@ -39,5 +42,4 @@
 		<div class="user-edit"></div>
 	</div>
 </div>
-
 {% endblock %}

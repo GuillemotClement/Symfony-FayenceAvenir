@@ -9,7 +9,7 @@
   text-transform: uppercase;
   margin-top: 2rem 0;
   &-small {
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
   }
   &:hover {
     opacity: 0.8;
@@ -31,4 +31,7 @@
     color: var(--text-light);
     border: none;
   }
+}
+.action {
+  margin: 2rem 0;
 }

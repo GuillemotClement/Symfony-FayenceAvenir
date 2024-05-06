@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArticleController extends AbstractController
 {
-    #[Route('/article', name: 'article_show')]
+    #[Route('/article', name: 'articles_show')]
     public function index(ArticleRepository $articlesRepo): Response
     {
         $articles = $articlesRepo->findAll();   
@@ -37,13 +37,12 @@ class ArticleController extends AbstractController
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('article_show');
+            return $this->redirectToRoute('articles_show');
         }
         return $this->render('article/new.html.twig',[
             'form' => $articleForm->createView()
         ]);
     }
-
 
     #[Route('/article/delete/{id}', name: 'article_delete')]
     public function deleteArticle(EntityManagerInterface $em, ?int $id, ArticleRepository $articleRepo)
@@ -53,5 +52,15 @@ class ArticleController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'Votre article à bien été supprimé');
         return $this->redirectToRoute("administration");
+    }
+
+    #[Route('article/show/{id}', name: 'article_show')]
+    public function showArticle(ArticleRepository $articleRepo, ?int $id)
+    {
+        $article = $articleRepo->find($id);
+
+        return $this->render('article/show.html.twig',[
+            'article' => $article
+        ]);
     }
 }
