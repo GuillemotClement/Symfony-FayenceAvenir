@@ -25,8 +25,24 @@
       padding: 1rem;
       border: 1px solid var(--gray-light);
       box-shadow: var(--shadow);
-      margin-top: 0.5rem;
       border-radius: var(--radius);
+      font-family: var(--font-text);
+    }
+    select {
+      border: 1px solid var(--gray-light);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      font-family: var(--font-text);
+      border-radius: var(--radius);
+    }
+    textarea {
+      border-radius: var(--radius);
+      font-family: var(--font-text);
+      border: 1px solid var(--gray-light);
+      box-shadow: var(--shadow);
+      height: 20rem;
+      width: 60rem;
+      padding: 1.5rem;
     }
   }
   .form-error {
