@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% for event in events %}
+    <h3>{{event.name}}</h3>
+{% endfor %}
+{% endblock %}

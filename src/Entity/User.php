@@ -57,9 +57,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'author')]
     private Collection $articles;
 
+    /**
+     * @var Collection<int, Event>
+     */
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'author', orphanRemoval: true)]
+    private Collection $events;
+
+    /**
+     * @var Collection<int, Response>
+     */
+    #[ORM\OneToMany(targetEntity: Response::class, mappedBy: 'author', orphanRemoval: true)]
+    private Collection $responses;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->events = new ArrayCollection();
+        $this->responses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -197,6 +211,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($article->getAuthor() === $this) {
                 $article->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): static
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): static
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getAuthor() === $this) {
+                $event->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Response>
+     */
+    public function getResponses(): Collection
+    {
+        return $this->responses;
+    }
+
+    public function addResponse(Response $response): static
+    {
+        if (!$this->responses->contains($response)) {
+            $this->responses->add($response);
+            $response->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponse(Response $response): static
+    {
+        if ($this->responses->removeElement($response)) {
+            // set the owning side to null (unless already changed)
+            if ($response->getAuthor() === $this) {
+                $response->setAuthor(null);
             }
         }
 

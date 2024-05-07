@@ -1,0 +1,11 @@
+.event-action {
+  margin: 2rem;
+}
+.event-list {
+  .event {
+    background: white;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow);
+  }
+}

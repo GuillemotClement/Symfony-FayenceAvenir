@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,6 +34,17 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
+
+    /**
+     * @var Collection<int, Response>
+     */
+    #[ORM\OneToMany(targetEntity: Response::class, mappedBy: 'article', orphanRemoval: true)]
+    private Collection $responses;
+
+    public function __construct()
+    {
+        $this->responses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -106,6 +119,36 @@ class Article
     public function setAuthor(?User $author): static
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Response>
+     */
+    public function getResponses(): Collection
+    {
+        return $this->responses;
+    }
+
+    public function addResponse(Response $response): static
+    {
+        if (!$this->responses->contains($response)) {
+            $this->responses->add($response);
+            $response->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponse(Response $response): static
+    {
+        if ($this->responses->removeElement($response)) {
+            // set the owning side to null (unless already changed)
+            if ($response->getArticle() === $this) {
+                $response->setArticle(null);
+            }
+        }
 
         return $this;
     }
