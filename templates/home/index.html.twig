@@ -1,12 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }}{% endblock %}
-
 {% block body %}
 <div class="content">
-{% for article in articles %}
-<h2>{{ article.title }}</h2>
-  
-{% endfor %}
+  <div class="ctn-hero b1">
+    <h2>Fayence Avenir</h2>
+    <div class="hero-content">
+      <div class="hero-img">
+        <img src="{{ asset('build/images/hero.jpeg')}}" alt="">
+      </div>
+      <div class="hero-text">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quasi placeat tempore numquam corporis odit. Minima consequuntur ullam enim velit saepe dolores aperiam, dolor tempore ratione culpa pariatur adipisci nulla provident veniam odit molestias nam blanditiis nihil sapiente quo unde est. Esse beatae aspernatur nam repudiandae doloribus nemo quas voluptas.</p>
+      </div>
+    </div>
+  </div>
+  {% for article in articles %}
+  <h2>{{ article.title }}</h2>
+    
+  {% endfor %}
 </div>
 {% endblock %}
