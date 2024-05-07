@@ -18,8 +18,8 @@
             {% endif %}
           <a href="{{ path('profil') }}"><img src="{{ app.user.picture }}" alt="" class="avatar"></a>
         {% else %}
-          <a href=""><i class="fa-solid fa-right-to-bracket"></i></a>
-          <a href=""><i class="fa-solid fa-user-plus"></i></a>
+          <a href="{{ path('login') }}"><i class="fa-solid fa-right-to-bracket"></i></a>
+          <a href=" {{ path('register') }}"><i class="fa-solid fa-user-plus"></i></a>
         {% endif %}
       </div>
     </div>
