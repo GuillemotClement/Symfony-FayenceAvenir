@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="content">
+  <div class="form-container">
+    <h1>Modifier le rôle</h1>
+      {{ form_start(form) }}
+        <div class="form-row">
+          {{ form_label(form.roles) }}
+          {{ form_widget(form.roles) }}
+          {{ form_errors(form.roles) }}
+        </div>
+        <div class="action">
+          <button class="btn btn-primary">Valider</button>
+        </div>
+      {{ form_end(form) }}
+  </div>
+</div>
+{% endblock %}

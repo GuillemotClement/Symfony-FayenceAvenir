@@ -2,16 +2,17 @@
 @use "reset";
 @use "base";
 @use "utils";
-
+@use "tools";
 @use "debug";
 
 // LAYOUT
 @use "layout/header";
 @use "layout/footer";
-@use "layout/administration";
 
 // COMPONENTS
 @use "components/button";
 @use "components/form";
 @use "components/article";
 @use "components/event";
+
+@use "pages/administration";

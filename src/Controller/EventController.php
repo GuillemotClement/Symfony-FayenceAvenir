@@ -48,4 +48,15 @@ class EventController extends AbstractController
             'event' => $event
         ]);
     }
+
+    #[Route('event/delete/{id}', name: 'delete_event')]
+    public function deleteEvent(?int $id, EventRepository $eventRepo, EntityManagerInterface $em)
+    {
+        $event = $eventRepo->find($id);
+        $em->remove($event);
+        $em->flush();
+        $this->addFlash('success', 'Evènement supprimé avec succès');
+
+        return $this->redirectToRoute('administration');
+    }
 }

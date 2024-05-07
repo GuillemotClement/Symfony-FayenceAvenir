@@ -52,13 +52,28 @@
 					<div class="event-action">
 						<a href="{{ path('show_event', { name: event.name }) }}" class="btn btn-primary btn-small">Voir</a>
 						<a href="" class="btn btn-warning btn-small">Editer</a>
-						<a href="" class="btn btn-danger btn-small">Supprimer</a>
+						<a href="{{ path('delete_event', { id: event.id }) }}" class="btn btn-danger btn-small">Supprimer</a>
 					</div>
 				</div>
 				{% endfor %}
 			</div>
 		</div>
-		<div class="user-edit"></div>
+		<div class="user-edit">
+			<h2>Utilisateur</h2>
+			<div class="user-list flex row">
+				{% for user in users %}
+					<div class="user mr-15">
+						<h3>{{ user.firstname}} {{user.lastname}}</h3>
+						<a href="{{path('add_role_user', { id: user.id }) }}">Modifier rôle</a>
+						<ul>
+							{% for role in user.roles %}
+								<li>Role : {{ role }}</li>
+							{% endfor %}
+						</ul>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
 	</div>
 </div>
 {% endblock %}
