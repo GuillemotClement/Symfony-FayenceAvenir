@@ -13,7 +13,9 @@
   {%- if is_granted('IS_AUTHENTICATED_FULLY') -%}
     <a href="{{ path('logout') }}" class="btn"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
     <a href="" class="btn"><i class="fa-solid fa-user"></i>Profil</a>
-    <a href="{{ path('administration') }}" class="btn"><i class="fa-solid fa-pen-nib">Administration</i></a>
+    {% if is_granted('ROLE_ADMIN') %}
+      <a href="{{ path('administration') }}" class="btn"><i class="fa-solid fa-pen-nib">Administration</i></a>
+    {% endif %}
   {% else %}
     <a href="{{ path('login') }}" class="btn"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
     <a href="{{ path('register') }}" class="btn"><i class="fa-solid fa-database"></i>Inscription</a>  

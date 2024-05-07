@@ -2,10 +2,10 @@
 
 {% block body %}
 <div class="content">
-  <div class="form-container">
+  <div class="form-container form-role">
     <h1>Modifier le rôle</h1>
       {{ form_start(form) }}
-        <div class="form-row">
+        <div class="form-row checkbox">
           {{ form_label(form.roles) }}
           {{ form_widget(form.roles) }}
           {{ form_errors(form.roles) }}
