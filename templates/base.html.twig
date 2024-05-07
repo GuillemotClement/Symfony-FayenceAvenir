@@ -17,11 +17,16 @@
 		{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-<body>
-	{{ include("partials/_header.html.twig") }}
-	<div class="app-content">
-		{% block body %}{% endblock %}
-	</div>
+	<body class="flex column">
+		{{ include("partials/_header.html.twig") }}
+		<div class="app-content flex fill row-nowrap justify-center">
+			{% block body %}{% endblock %}
+		</div>
+		{% for cat, list in app.flashes %}
+				{% for message in list %}
+						<div class="flash flash-{{ cat }}">{{ message }}</div>
+				{% endfor %}
+		{% endfor %}
 	{{ include("partials/_footer.html.twig") }}
 </body>
 </html>

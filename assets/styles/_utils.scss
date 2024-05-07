@@ -4,10 +4,35 @@
 .column {
   flex-flow: column;
 }
+.row {
+  flex-flow: row wrap;
+}
+.row-nowrap {
+  flex-flow: row nowrap;
+}
 .fill {
   flex: 1;
 }
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.align-center {
+  align-items: center;
+}
 
+.p5 {
+  padding: 0.5rem;
+}
 .p20 {
   padding: 2rem;
+}
+
+.mb-20 {
+  margin-bottom: 2rem;
+}
+.mr-15 {
+  margin-right: 1.5rem;
 }

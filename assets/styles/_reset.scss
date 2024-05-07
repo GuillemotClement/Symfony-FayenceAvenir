@@ -20,6 +20,10 @@ a {
   color: var(--text);
   text-decoration: none;
   font-family: var(--font-text);
+  transition: all 0.3s;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 ul {

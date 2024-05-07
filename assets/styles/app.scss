@@ -2,7 +2,7 @@
 @use "reset";
 @use "base";
 @use "utils";
-@use "tools";
+
 @use "debug";
 
 // LAYOUT
@@ -16,3 +16,8 @@
 @use "components/event";
 
 @use "pages/administration";
+
+// NEW
+
+// COMPONENTS
+@use "components/avatar";

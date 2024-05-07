@@ -1,24 +1,38 @@
-<header class="">
-  <div class="logo">
-    <a href="{{path('home')}}">
-      <img src="{{ asset('build/images/logo.png')}}" alt="logo fayence avenir">
-    </a>
-  </div>
-  <ul class="nav">
-    <li><a href="{{ path('articles_show') }}">Blog</a></li>
-    <li><a href="{{ path('event') }}">Evènements</a></li>
-    {# <li><a href="">A propos</a></li> #}
-  </ul>
-  <div class="action">
-  {%- if is_granted('IS_AUTHENTICATED_FULLY') -%}
-    <a href="{{ path('logout') }}" class="btn"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
-    <a href="" class="btn"><i class="fa-solid fa-user"></i>Profil</a>
-    {% if is_granted('ROLE_ADMIN') %}
-      <a href="{{ path('administration') }}" class="btn"><i class="fa-solid fa-pen-nib">Administration</i></a>
-    {% endif %}
-  {% else %}
-    <a href="{{ path('login') }}" class="btn"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
-    <a href="{{ path('register') }}" class="btn"><i class="fa-solid fa-database"></i>Inscription</a>  
-  {% endif %}
+<header class="flex row-nowrap justify-center">
+  <div class="flex column fill">
+    <div class="header-top flex row-nowrap align-center justify-between ">
+      <div class="header-logo">
+        <a href="{{ path('home') }}" class="">
+          <img src="{{ asset('build/images/logo.png') }}" alt="logo">
+        </a>
+      </div>
+      <div class="header-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" class="fill">
+      </div>
+      <div class="header-action flex align-center">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+          <a href="{{ path('logout') }}"><i class="fa-solid fa-right-from-bracket"></i></a>
+            {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('administration') }}"><i class="fa-solid fa-gear"></i></a>
+            {% endif %}
+          <a href="{{ path('profil') }}"><img src="{{ app.user.picture }}" alt="" class="avatar"></a>
+        {% else %}
+          <a href=""><i class="fa-solid fa-right-to-bracket"></i></a>
+          <a href=""><i class="fa-solid fa-user-plus"></i></a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="header-bottom flex justify-between">
+      <ul class="header-nav flex ">
+        <li><a href="">l'Assos</a></li>
+        <li><a href="">Articles</a></li>
+        <li><a href="">Evènements</a></li>
+        <li><a href="">Contact</a></li>
+      </ul>
+      <div class="header-social">
+        <li><a href="https://www.facebook.com/fayence.avenir/?paipv=0&eav=Afbr0l5xOiVyMB2YNpxchf78PnK88bRHxVZh1gMKwt-jGeCFn4svDy13CQ9UZfKl7O0&_rdr" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
+      </div>
+    </div>
   </div>
 </header>
