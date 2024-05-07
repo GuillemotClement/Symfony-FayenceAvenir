@@ -13,8 +13,10 @@ class HomeController extends AbstractController
 		#[Route('/', name: 'home')]
 		public function index(ArticleRepository $articleRepo, EventRepository $eventRepo): Response
 		{
+			$articles = $articleRepo->getLastArticles();
+
 				return $this->render('home/index.html.twig', [
-						'controller_name' => 'HomeController',
+						'articles' => $articles
 				]);
 		}
 }
