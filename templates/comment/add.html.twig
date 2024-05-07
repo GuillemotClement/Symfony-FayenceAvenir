@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  <div class="content">
+    <div class="form-container">
+      <h1>Nouveau commentaire</h1>
+        {{ form_start(form) }}
+          <div class="form-row">
+            {{ form_label(form.content) }}
+            {{ form_widget(form.content) }}
+            {{ form_errors(form.content) }}
+          </div>
+          <div class="action">
+            <button class="btn btn-primary">Valider</button>
+          </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+

@@ -17,6 +17,7 @@
                     <p class="article-ctn-content">{{ article.content | slice(0, 50) }}...</p>  
                     <a href="{{ path('article_show', {id: article.id})}}">Lire l'article</a>
                 </div>
+                <a href="{{ path('add_response', { id: article.id }) }}" class="small">Commenter</a>
             </div> 
         {% endfor %}
     </div>

@@ -16,17 +16,6 @@ class ResponseType extends AbstractType
     {
         $builder
             ->add('content')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('author', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
-            ->add('article', EntityType::class, [
-                'class' => Article::class,
-                'choice_label' => 'id',
-            ])
         ;
     }
 

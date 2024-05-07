@@ -30,6 +30,7 @@ class SecurityController extends AbstractController
         if($userForm->isSubmitted() && $userForm->isValid()){
             $hash = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $user->setRoles(['ROLE_USER']);
             $em->persist($user);
             $em->flush();
             $this->addFlash('success', 'Inscription réussie');

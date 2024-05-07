@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class AdministrationController extends AbstractController
 {
@@ -31,6 +32,7 @@ class AdministrationController extends AbstractController
     }
 
     #[Route('administration/userRole/{id}', name: 'add_role_user')]
+    #[IsGranted('ROLE_ADMIN')]
     public function addRole(UserRepository $userRepo, EntityManagerInterface $em, ?int $id, Request $request)
     {
         $user = $userRepo->find($id);
@@ -43,11 +45,19 @@ class AdministrationController extends AbstractController
 
             return $this->redirectToRoute('administration');
         }
-        
         return $this->render('administration/role.html.twig', [
             'form' => $roleForm->createView(),
             'user' => $user
         ]);
+    }
+
+    #[Route('administration/user/delete/{id}', name: 'delete_user')]
+    public function deleteUser(UserRepository $userRepository, ?int $id, EntityManagerInterface $em)
+    {
+        $user = $userRepository->find($id);
+        $em->remove($user);
+        $em->flush();
+        return $this->redirectToRoute('administration');
     }
 
 

@@ -7,12 +7,12 @@
 <div class="administration">
 	<div class="sidebar">
 		<ul>
-			<li><a href="#article">Article</a></li>
+			<li><a href="#article">Mes Articles</a></li>
 			<ul>
 				<li><a href="{{ path('article_new')}}" class="small">Ajouter article</a></li>
 			</ul>
 			<div class="separator"></div>
-			<li><a href="">Evènements</a></li>
+			<li><a href="">Mes Evènements</a></li>
 			<ul>
 				<li><a href="{{ path('add_event')}}" class="small">Ajouter Evènement</a></li>
 			</ul>
@@ -20,7 +20,7 @@
 	</div>
 	<div class="content-edit">
 		<div class="article-edit">
-			<h2 id="article">Article</h2>
+			<h2 id="article">Mes Article</h2>
 			<div class="article-list">
 				{% for article in articles %}
 					<div class="ctn-article">
@@ -42,7 +42,7 @@
 			</div>
 		</div>
 		<div class="event-edit">
-			<h2>Evenement</h2>
+			<h2>Mes Evenement</h2>
 			<div class="event-list">
 				{% for event in events %}
 				<div class="event">
@@ -70,6 +70,7 @@
 								<li>Role : {{ role }}</li>
 							{% endfor %}
 						</ul>
+						<a href="{{ path('delete_user', { id: user.id }) }}" class="small">Supprimer User</a>
 					</div>
 				{% endfor %}
 			</div>

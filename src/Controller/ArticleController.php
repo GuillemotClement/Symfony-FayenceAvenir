@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\User;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\ResponseRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,12 +56,13 @@ class ArticleController extends AbstractController
     }
 
     #[Route('article/show/{id}', name: 'article_show')]
-    public function showArticle(ArticleRepository $articleRepo, ?int $id)
+    public function showArticle(ArticleRepository $articleRepo, ?int $id, ResponseRepository $commentRepo)
     {
         $article = $articleRepo->find($id);
-
+        $comments = $commentRepo->findBy(['article' => $article]);
         return $this->render('article/show.html.twig',[
-            'article' => $article
+            'article' => $article,
+            'comments' => $comments
         ]);
     }
 }

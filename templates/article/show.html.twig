@@ -16,5 +16,12 @@
       <a href="" class="btn btn-danger btn-small">Supprimer</a>
     </div>
 </div>
+<div class="ctn-comment">
+  {% for comment in comments %}
+    <p>Commentaire de {{comment.author.firstname}} {{comment.author.lastname}}</p>
+    <p>Posté le {{ comment.createdAt | date('d M Y à h:m')}}</p>
+    <p>{{ comment.content }}</p>
+  {% endfor %}
+</div>
  
 {% endblock %}
