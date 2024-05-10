@@ -1,15 +1,11 @@
 footer {
+  background: var(--primary);
+  padding: 1.5rem 2rem;
+  color: white;
   display: flex;
-  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background: var(--bg-primary);
-  color: var(--text-light);
   a {
-    color: var(--text-light);
-  }
-  i {
-    font-size: 2.5rem;
+    color: white;
   }
 }

@@ -47,8 +47,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Ajouter une photo de profil')]
-    #[Assert\Url(message: 'Renseigner une url')]
+    // #[Assert\NotBlank(message: 'Ajouter une photo de profil')]
+    // #[Assert\Url(message: 'Renseigner une url')]
     private ?string $picture = null;
 
     /**

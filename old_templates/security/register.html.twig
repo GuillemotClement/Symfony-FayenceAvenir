@@ -27,11 +27,8 @@
         {{ form_widget(form.lastname) }}
         {{ form_errors(form.lastname) }}
       </div>
-      <div class="form-row">
-        {{ form_label(form.picture) }}
-        {{ form_widget(form.picture) }}
-        {{ form_errors(form.picture) }}
-      </div>
+      
+      {{form_rest(form)}}
       <div class="action">
         <button class="btn btn-primary mr-10">Inscription</button>
       </div>

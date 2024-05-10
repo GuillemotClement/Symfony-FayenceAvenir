@@ -1,0 +1,38 @@
+.app-content {
+  // display: flex;
+  // max-width: 1400px;
+  // margin: auto;
+  // border: 1px solid red;
+  flex: 1;
+  // justify-content: center;
+  padding: 1.5rem 2rem;
+}
+
+.separator {
+  border-bottom: 1px solid var(--gray-light);
+  // margin: 20px 0;
+}
+
+.small {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+.content {
+  max-width: var(--max-width);
+  min-width: var(--max-width);
+}
+
+.hero {
+  // border: 1px solid red;
+  // background: red;
+  display: flex;
+  flex-flow: row;
+  &-img {
+    img {
+      height: 400px;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+    }
+  }
+}

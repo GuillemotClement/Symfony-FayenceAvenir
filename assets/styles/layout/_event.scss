@@ -1,0 +1,48 @@
+.event {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-top: 10rem;
+  margin-bottom: 5rem;
+  &-grid {
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(3, 400px);
+    grid-auto-columns: repeat(3, 400px);
+    gap: 20px;
+  }
+  &-element {
+    max-height: 50rem;
+    box-shadow: var(--shadow);
+    background-color: white;
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+    &:hover {
+      cursor: pointer;
+      img {
+        transform: scale(1.1);
+      }
+      h3 {
+        color: var(--primary);
+      }
+      h3 {
+        transition: color 0.3s;
+      }
+    }
+  }
+  &-img {
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    img {
+      width: 100%;
+      transition: 1s transform;
+    }
+  }
+  &-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

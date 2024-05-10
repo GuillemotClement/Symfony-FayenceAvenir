@@ -1,38 +1,28 @@
-<header class="flex row-nowrap justify-center">
-  <div class="flex column fill">
-    <div class="header-top flex row-nowrap align-center justify-between ">
-      <div class="header-logo">
-        <a href="{{ path('home') }}" class="">
-          <img src="{{ asset('build/images/logo.png') }}" alt="logo">
-        </a>
-      </div>
-      <div class="header-search">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" class="fill">
-      </div>
-      <div class="header-action flex align-center">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-          <a href="{{ path('logout') }}"><i class="fa-solid fa-right-from-bracket"></i></a>
-            {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('administration') }}"><i class="fa-solid fa-gear"></i></a>
-            {% endif %}
-          <a href="{{ path('profil') }}"><img src="{{ app.user.picture }}" alt="" class="avatar"></a>
-        {% else %}
-          <a href="{{ path('login') }}"><i class="fa-solid fa-right-to-bracket"></i></a>
-          <a href=" {{ path('register') }}"><i class="fa-solid fa-user-plus"></i></a>
-        {% endif %}
-      </div>
+<header>
+  <div class="header-top">
+    <div class="header-logo">
+      <a href="{{ path('home') }}">
+        <img src="{{ asset('build/images/logo.png')}}" alt="logo">
+      </a>
     </div>
-    <div class="header-bottom flex justify-between">
-      <ul class="header-nav flex ">
-        <li><a href="">l'Assos</a></li>
-        <li><a href="{{ path('articles_show') }}">Articles</a></li>
-        <li><a href="">Evènements</a></li>
-        <li><a href="">Contact</a></li>
-      </ul>
-      <div class="header-social">
-        <li><a href="https://www.facebook.com/fayence.avenir/?paipv=0&eav=Afbr0l5xOiVyMB2YNpxchf78PnK88bRHxVZh1gMKwt-jGeCFn4svDy13CQ9UZfKl7O0&_rdr" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
-      </div>
+    <div class="header-action">
+      <a href="" class="btn btn-primary">Connexion</a>
+      <a href="" class="btn btn-secondary">Inscription</a>
+      <a href="" class="">
+        <img class="avatar" src="https://randomuser.me/api/portraits/men/84.jpg" alt="profil">
+      </a>
+      <a href="" class="btn btn-primary">deconnexion</a>
     </div>
+  </div>
+  <div class="header-bottom">
+  <ul >
+    <li><a href="">Article</a></li>
+    <li><a href="">Agenda</a></li>
+    <li><a href="">l'Assocation</a></li>
+    <li><a href="">Contact</a></li>
+  </ul>
+  <div class="header-social">
+    <a href="" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+  </div>
   </div>
 </header>

@@ -1,26 +1,11 @@
 @use "variables";
+@use "flex";
 @use "reset";
 @use "base";
-@use "utils";
 
-@use "debug";
+@use "components/btn";
 
-// LAYOUT
 @use "layout/header";
 @use "layout/footer";
-
-// COMPONENTS
-@use "components/button";
-@use "components/form";
-@use "components/article";
-@use "components/event";
-
-@use "pages/administration";
-
-// NEW
-
-// COMPONENTS
-@use "components/avatar";
-
-// PAGE
-@use "pages/home";
+@use "layout/articles";
+@use "layout/event";

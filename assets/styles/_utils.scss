@@ -1,38 +1,57 @@
-.flex {
-  display: flex;
-}
-.column {
-  flex-flow: column;
-}
-.row {
-  flex-flow: row wrap;
-}
-.row-nowrap {
-  flex-flow: row nowrap;
-}
-.fill {
-  flex: 1;
-}
-.justify-center {
-  justify-content: center;
-}
-.justify-between {
-  justify-content: space-between;
-}
-.align-center {
-  align-items: center;
-}
-
 .p5 {
   padding: 0.5rem;
+}
+.p10 {
+  padding: 1rem;
+}
+.p15 {
+  padding: 1.5rem;
 }
 .p20 {
   padding: 2rem;
 }
-
-.mb-20 {
-  margin-bottom: 2rem;
+.p30 {
+  padding: 3rem;
 }
-.mr-15 {
-  margin-right: 1.5rem;
+
+.py5 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py10 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.py20 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.m5 {
+  margin: 0.5rem;
+}
+.m10 {
+  margin: 1rem;
+}
+.m15 {
+  margin: 1.5rem;
+}
+.m20 {
+  margin: 2rem;
+}
+.m30 {
+  margin: 3rem;
+}
+
+.my5 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.my10 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.my20 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }

@@ -1,39 +1,48 @@
 header {
   background: var(--primary);
-  color: var(--light);
   box-shadow: var(--shadow);
-
-  a {
-    color: var(--light);
-    font-size: 2.5rem;
-    margin-right: 0.5em;
-  }
   .header-top {
-    padding: 1rem 2rem;
-    width: 100%;
-    box-shadow: var(--shadow);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     .header-logo {
       img {
         height: 10rem;
       }
     }
-    .header-search {
-      i {
-        margin-right: 0.5rem;
+    .header-action {
+      padding: 1.5rem 0;
+      display: flex;
+      align-items: center;
+      a {
+        margin-right: 1rem;
       }
-      input {
-        padding: 0.5rem;
-        border-radius: var(--radius);
-        font-family: var(--font-text);
-        width: 40rem;
+      .avatar {
+        // display: inline-block;
+        border-radius: 50%;
+        height: 5rem;
       }
     }
   }
   .header-bottom {
-    padding: 0.5rem 2rem;
-    background: var(--light);
-    a {
-      color: var(--text);
+    background: white;
+    padding: 1.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    ul {
+      display: flex;
+      li {
+        margin-right: 1rem;
+      }
+    }
+    .header-social {
+      font-size: 2rem;
+      a {
+        color: var(--primary);
+        margin-right: 3rem;
+      }
     }
   }
 }

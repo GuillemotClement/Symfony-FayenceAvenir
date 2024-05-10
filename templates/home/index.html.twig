@@ -2,20 +2,56 @@
 
 {% block body %}
 <div class="content">
-  <div class="ctn-hero b1">
-    <h2>Fayence Avenir</h2>
-    <div class="hero-content">
-      <div class="hero-img">
-        <img src="{{ asset('build/images/hero.jpeg')}}" alt="">
-      </div>
-      <div class="hero-text">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quasi placeat tempore numquam corporis odit. Minima consequuntur ullam enim velit saepe dolores aperiam, dolor tempore ratione culpa pariatur adipisci nulla provident veniam odit molestias nam blanditiis nihil sapiente quo unde est. Esse beatae aspernatur nam repudiandae doloribus nemo quas voluptas.</p>
-      </div>
+  <div class="article">
+    <h2>Nos dernier articles</h2>
+    <div class="article-grid">
+      {% for article in articles %}
+        <div class="article-element">
+          <a href="{{ path('article_show', { id: article.id}) }}">
+            <div class="article-img">
+              <img src="{{ article.picture}}" alt="">
+            </div>
+            <div class="article-content">
+              <h3>{{ article.title }}</h3>
+              <p class="small category">{{ article.category }}</p>
+              <p class="small"><span class="accent">{{article.author.firstname}} {{article.author.lastname}}</span> le {{ article.createdAt | date('d M Y à h:m')}}</p>
+              <div class="separator"></div>
+              <p>{{ article.content | slice(0, 200) }}...</p>
+              <div class="separator"></div>
+              <div class="article-action">
+                <a class="small" href="">Partager</a>
+                <a class="small" href="">Commenter</a>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
     </div>
   </div>
-  {% for article in articles %}
-  <h2>{{ article.title }}</h2>
-    
-  {% endfor %}
+  <div class="event">
+    <h2>Nos prochains évènements</h2>
+    <div class="event-grid">
+      {% for event in events %}
+        <div class="article-element">
+          <a href="">
+            <div class="event-img">
+              <img src="{{ event.picture}}" alt="">
+            </div>
+            <div class="event-content">
+              <h3>{{ event.name }}</h3>
+              <p>Date : {{ event.date | date('d M Y à h:m')}}</p>
+              <p>Addresse : {{ event.adresse }}</p>
+              <div class="separator"></div>
+              <p>{{ event.content | slice(0, 200) }}...</p>
+              <div class="separator"></div>
+              <div class="event-action">
+                <a class="small" href="">Ajouter à l'agenda</a>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 {% endblock %}

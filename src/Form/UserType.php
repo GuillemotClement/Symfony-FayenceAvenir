@@ -5,9 +5,11 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 
 class UserType extends AbstractType
 {
@@ -18,7 +20,22 @@ class UserType extends AbstractType
             ->add('password', PasswordType::class, ['label' => 'Mot de passe *'])
             ->add('firstname', null, ['label' => 'Prénom *'])
             ->add('lastname', null, ['label' => 'Nom *'])
-            ->add('picture', null, ['label' => 'Image de profil *'])
+            ->add('pictureFile', FileType::class, [
+                'label'=>'Image',
+                'mapped' => false,
+                'constraints' => [
+                    new Image(
+                        [
+                            'mimeTypesMessage'=> 'Veuillez soumettre une image',
+                            'maxSize' => '2M',
+                            'maxSizeMessage' => 'Image trop lourde. La limite est de {{ limite}} {{ suffix }}'
+                        ]
+                    )
+                ]
+            ])
+
+
+
         ;
     }
 
