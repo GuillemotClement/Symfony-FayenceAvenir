@@ -21,8 +21,12 @@
       <pre class="article-text">{{ article.content | nl2br }}</pre>
       <div class="separator"></div>
       <div class="article-action">
+      {% if is_granted('ROLE_USER') %}
         <a href="{{ path('add_response', {id: article.id})}}" class="btn btn-action">Commenter</a>
-        <a href="{{ path('add_response', {id: article.id})}}" class="btn btn-action">Partager</a>
+        <a href="" class="btn btn-action">Partager</a>
+      {% else %}
+        <p>Pour ajouter un commentaire, veuillez vous <span class="accent"><a href="{{ path('login')}}">connecter</a></span></p>
+      {% endif %}
       </div>
       <div class="separator"></div>
       <div class="article-comments">
