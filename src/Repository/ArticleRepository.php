@@ -25,6 +25,23 @@ class ArticleRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
+    public function getFilterArticles(string $category)
+    {
+        return $this->createQueryBuilder('a')
+                    ->where('a.category = :category')
+                    ->setParameter('category', $category)
+                    ->orderBy('a.createdAt', 'DESC')
+                    ->getQuery()
+                    ->getResult();           
+    }
+
+    public function getArticleByDescCreated()
+    {
+        return $this->createQueryBuilder('a')
+                    ->orderBy('a.createdAt', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
     //    /**
     //     * @return Article[] Returns an array of Article objects
     //     */

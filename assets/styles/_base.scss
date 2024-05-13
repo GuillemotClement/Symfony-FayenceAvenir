@@ -11,6 +11,7 @@ body {
 }
 .content {
   max-width: var(--max-width);
+  padding-top: 2rem;
   // padding: 20rem;
 }
 
@@ -31,4 +32,11 @@ body {
   font-weight: 700;
   font-style: italic;
   color: var(--primary);
+}
+
+.count {
+  color: white;
+  background: red;
+  border-radius: 100%;
+  padding: 0.5rem 1rem;
 }

@@ -20,7 +20,7 @@ class ArticleController extends AbstractController
     public function index(ArticleRepository $articlesRepo): Response
     {
         $user = $this->getUser();
-        $articles = $articlesRepo->findAll();   
+        $articles = $articlesRepo->getArticleByDescCreated();   
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
             'user' => $user
@@ -75,6 +75,17 @@ class ArticleController extends AbstractController
         return $this->render('article/show.html.twig',[
             'article' => $article,
             'comments' => $comments
+        ]);
+    }
+
+    #[Route('article/category/{category}', name: 'article_show_category')]
+    public function showArticlebyCategory(ArticleRepository $articleRepo, ?string $category)
+    {
+        $user = $this->getUser();
+        $articles = $articleRepo->getFilterArticles($category);
+        return $this->render('article/index.html.twig', [
+            'articles' => $articles,
+            'user' => $user
         ]);
     }
 }

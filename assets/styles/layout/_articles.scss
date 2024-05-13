@@ -1,6 +1,6 @@
 .article {
   padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 4rem;
   &-grid {
     display: grid;
     place-content: center;
@@ -52,5 +52,44 @@
     flex-flow: row nowrap;
     justify-content: space-around;
     margin-bottom: 0.5rem;
+  }
+}
+
+.article-filter {
+  display: flex;
+  flex-flow: wrap nowrap;
+  justify-content: center;
+  gap: 2rem;
+  li {
+    padding: 1rem 1.5rem;
+    background: white;
+    border-radius: 25px;
+    box-shadow: var(--shadow);
+  }
+  i {
+    margin-right: 0.5rem;
+  }
+}
+.article-list {
+  display: flex;
+  flex-flow: row wrap;
+  .article-ctn {
+    background: white;
+    width: 40rem;
+    margin: 2rem;
+    box-shadow: var(--shadow);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .article-picture {
+    height: 20rem;
+    overflow: hidden;
+    img {
+      width: 100%;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
   }
 }

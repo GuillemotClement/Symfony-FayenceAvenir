@@ -6,24 +6,23 @@
       </a>
     </div>
     <div class="header-action">
-      <a href="{{ path('login')}}" class="btn btn-primary">Connexion</a>
-      <a href="{{ path('register')}}" class="btn btn-secondary">Inscription</a>
       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="" class="">
-          <img class="avatar" src="{{ asset(user.picture) }}" alt="profil">
-        </a>
         <a href="{{ path('logout')}}" class="btn btn-primary">deconnexion</a>
         {% if is_granted('ROLE_ADMIN') %}
           <a href="{{ path('administration')}}" class="btn btn-primary">Administration</a>
         {% endif %}
+        <a href="" class="">
+          <img class="avatar" src="{{ asset(user.picture) }}" alt="profil">
+        </a>
+      {% else %}
+        <a href="{{ path('login')}}" class="btn btn-primary">Connexion</a>
+        <a href="{{ path('register')}}" class="btn btn-secondary">Inscription</a>
       {% endif %}
-      
-      
     </div>
   </div>
   <div class="header-bottom">
   <ul >
-    <li><a href="">Article</a></li>
+    <li><a href="{{ path('articles_show')}}">Articles</a></li>
     <li><a href="{{ path('event')}}">Agenda</a></li>
     <li><a href="">l'Assocation</a></li>
     <li><a href="">Contact</a></li>
