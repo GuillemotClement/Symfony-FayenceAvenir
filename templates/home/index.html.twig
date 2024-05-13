@@ -14,7 +14,13 @@
           <div class="article-content">
             <h3 class="article-title">{{ article.title }}</h3>
             <div class="article-info">
-              <p class="small category">{{ article.category }}</p>
+              <p class="small category">{{ article.category | replace({
+                'politic': 'Politique',
+                'nature': 'Nature', 
+                'food': 'Gastonomie', 
+                'sport': 'Sport', 
+                'work': 'Emploi' 
+              })}}</p>
               <p class="small"><span class="accent">{{article.author.firstname}} {{article.author.lastname}}</span> le {{ article.createdAt | date('d M Y à h:m')}}</p>
             </div>
             <div class="separator"></div>
@@ -32,28 +38,28 @@
       {% endfor %}
     </div>
   </div>
-  <div class="event">
+  <div class="events">
     <h2>Nos prochains évènements</h2>
-    <div class="event-grid">
+    <div class="event-list">
       {% for event in events %}
-        <div class="article-element">
           <a href="">
-            <div class="event-img">
+          <div class="event">
+            <div class="event-picture">
               <img src="{{ event.picture}}" alt="">
             </div>
             <div class="event-content">
-              <h3>{{ event.name }}</h3>
+              <h3 class="event-title">{{ event.name }}</h3>
               <p>Date : {{ event.date | date('d M Y à h:m')}}</p>
               <p>Addresse : {{ event.adresse }}</p>
               <div class="separator"></div>
               <p>{{ event.content | slice(0, 200) }}...</p>
               <div class="separator"></div>
-              <div class="event-action">
+              {# <div class="event-action">
                 <a class="small" href="">Ajouter à l'agenda</a>
-              </div>
+              </div> #}
             </div>
+          </div>
           </a>
-        </div>
       {% endfor %}
     </div>
   </div>
