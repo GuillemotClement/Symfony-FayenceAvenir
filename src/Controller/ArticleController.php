@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArticleController extends AbstractController
 {
+    // Affichages de tous les articles
     #[Route('/article', name: 'articles_show')]
     public function index(ArticleRepository $articlesRepo): Response
     {
@@ -27,6 +28,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    //création d'un nouvel article
     #[Route('/article/new', name: 'article_new')]
     public function newArticle(Request $request, EntityManagerInterface $em)
     {
@@ -35,20 +37,18 @@ class ArticleController extends AbstractController
         $articleForm = $this->createForm(ArticleType::class, $article);
         $articleForm->handleRequest($request);
         if($articleForm->isSubmitted() && $articleForm->isValid()){
-
+            // gestion envoi image
             $picture = $articleForm->get('pictureFile')->getData();
             $folder = $this->getParameter('article.folder');
             $ext = $picture->guessExtension();
             $filename = bin2hex(random_bytes(10)) . '.' . $ext;
             $picture->move($folder, $filename);
             $article->setPicture($this->getParameter('article.folder.public_path') . '/articles/' . $filename);
-
-
             $article->setCreatedAt(new \DateTimeImmutable());
             $article->setAuthor($user);
             $em->persist($article);
             $em->flush();
-
+            $this->addFlash('success', 'Article ajouté avec succès');
             return $this->redirectToRoute('articles_show');
         }
         return $this->render('article/new.html.twig',[
@@ -57,6 +57,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    // Suppression article
     #[Route('/article/delete/{id}', name: 'article_delete')]
     public function deleteArticle(EntityManagerInterface $em, ?int $id, ArticleRepository $articleRepo)
     {
@@ -67,17 +68,21 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute("administration");
     }
 
+    //Afficher un article précis
     #[Route('article/show/{id}', name: 'article_show')]
     public function showArticle(ArticleRepository $articleRepo, ?int $id, ResponseRepository $commentRepo)
     {
+        $user = $this->getUser();
         $article = $articleRepo->find($id);
         $comments = $commentRepo->findBy(['article' => $article]);
         return $this->render('article/show.html.twig',[
             'article' => $article,
-            'comments' => $comments
+            'comments' => $comments,
+            'user' => $user
         ]);
     }
 
+    //Affichage d'un article selon la category
     #[Route('article/category/{category}', name: 'article_show_category')]
     public function showArticlebyCategory(ArticleRepository $articleRepo, ?string $category)
     {

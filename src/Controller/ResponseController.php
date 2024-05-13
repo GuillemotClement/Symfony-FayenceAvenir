@@ -40,7 +40,8 @@ class ResponseController extends AbstractController
             return $this->redirectToRoute('article_show', ['id' => $article->getId()]);
         }
         return $this->render('comment/add.html.twig', [
-            'form' => $responseForm->createView()
+            'form' => $responseForm->createView(),
+            'user' => $user
         ]);
     }
 }

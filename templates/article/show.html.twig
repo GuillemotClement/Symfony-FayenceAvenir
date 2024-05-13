@@ -1,27 +1,50 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-<div class="ctn-article">
-   <h1>{{ article.title}}</h1>
-    <img src="{{ article.picture }}" alt="">
-    <div class="ctn-category">
-      <p><span class="category">{{ article.category }}</span></p>
-    </div>
-    <p class="article-date small">Ecrit le {{ article.createdAt | date('d M Y')}}</p>
-    <div class="separator"></div>
-    <p class="article-text">{{ article.content }}</p>
+<div class="content">
+  <div class="article-detail">
+    <h2>{{ article.title}}</h2>
+      <div class="article-picture">
+        <img src="{{ article.picture }}" alt="image article {{article.title}}">
+      </div>
+      <div class="article-info">
+        <p class="category">{{ article.category | replace({
+          'politic': 'Politique',
+          'nature': 'Nature', 
+          'food': 'Gastonomie', 
+          'sport': 'Sport', 
+          'work': 'Emploi' 
+        }) }}</p>
+        <p class="article-date small">Ecrit le {{ article.createdAt | date('d M Y à h:m')}} par <span class="author">{{article.author.firstname}} {{article.author.firstname}}</span></p>
+      </div>
+      <div class="separator"></div>
+      <pre class="article-text">{{ article.content | nl2br }}</pre>
+      <div class="separator"></div>
+      <div class="article-action">
+        <a href="{{ path('add_response', {id: article.id})}}" class="btn btn-action">Commenter</a>
+        <a href="{{ path('add_response', {id: article.id})}}" class="btn btn-action">Partager</a>
+      </div>
+      <div class="separator"></div>
+      <div class="article-comments">
+        <h3>Espace commentaires</h3>
+        <div class="comments">
+          <p class="small rules">Nous encourageons les commentaires respectueux et constructifs sur notre site web. Cependant, nous nous réservons le droit de supprimer tout commentaire inapproprié, offensant, diffamatoire, haineux, menaçant, spam ou tout autre commentaire qui ne respecte pas les règles de notre communauté.</p>
+          {% for comment in comments %}
+            <div class="comment">
+              <div class="comment-info">
+                <p class="">Commentaire de <span class="author">{{comment.author.firstname}} {{comment.author.lastname}}</span></p>
+                <p class="small">Posté le {{ comment.createdAt | date('d M Y à h:m')}}</p>
+              </div>
+              <pre class="comment-content">{{ comment.content }}</pre>
+            </div>
+          {% endfor %}
+          
+        </div>
+        
+      </div>
+  </div>
 
-    <div class="action">
-      <a href="" class="btn btn-warning btn-small">Editer</a>
-      <a href="" class="btn btn-danger btn-small">Supprimer</a>
-    </div>
 </div>
-<div class="ctn-comment">
-  {% for comment in comments %}
-    <p>Commentaire de {{comment.author.firstname}} {{comment.author.lastname}}</p>
-    <p>Posté le {{ comment.createdAt | date('d M Y à h:m')}}</p>
-    <p>{{ comment.content }}</p>
-  {% endfor %}
-</div>
+
  
 {% endblock %}

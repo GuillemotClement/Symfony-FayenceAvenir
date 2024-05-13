@@ -7,7 +7,11 @@ body {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-bottom: 5rem;
+  padding-top: 5rem;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
 }
 .content {
   max-width: var(--max-width);
@@ -39,4 +43,9 @@ body {
   background: red;
   border-radius: 100%;
   padding: 0.5rem 1rem;
+}
+
+.author {
+  color: var(--primary);
+  font-weight: 700;
 }

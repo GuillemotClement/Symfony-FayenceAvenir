@@ -15,7 +15,7 @@
   </ul>
   <div class="article-list">
     {% for article in articles %}
-    <a href="">
+    <a href="{{ path('article_show', {id: article.id})}}">
       <div class="article-ctn" href="">
         <div class="article-picture">
           <img src="{{ article.picture }}" alt="image article {{article.title}}">
@@ -28,10 +28,11 @@
           <p class="article-ctn-content">{{ article.content | slice(0, 50) }}...</p>  
           <a href="{{ path('article_show', {id: article.id})}}">Lire l'article</a>
         </div>
+        <div class="separator"></div>
         <div class="article-action flex justify-between">
           <div class="article-comment">
             <a href="{{ path('add_response', { id: article.id }) }}" class="small">Commenter</a>
-            <span class="count">5</span>
+            {# <span class="count">5</span> #}
           </div>
           <div class="article-share">
             <a class="small" href="">Partager</a>
