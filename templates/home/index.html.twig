@@ -2,29 +2,33 @@
 
 {% block body %}
 <div class="content">
-  <div class="article">
+  <div class="articles">
     <h2>Nos dernier articles</h2>
-    <div class="article-grid">
+    <div class="article-list">
       {% for article in articles %}
-        <div class="article-element">
-          <a href="{{ path('article_show', { id: article.id}) }}">
-            <div class="article-img">
-              <img src="{{ article.picture}}" alt="">
-            </div>
-            <div class="article-content">
-              <h3>{{ article.title }}</h3>
+        <a href="{{ path('article_show', { id: article.id}) }}">
+        <div class="article">
+          <div class="article-picture">
+            <img src="{{ article.picture}}" alt="image article {{ article.title }}">
+          </div>
+          <div class="article-content">
+            <h3 class="article-title">{{ article.title }}</h3>
+            <div class="article-info">
               <p class="small category">{{ article.category }}</p>
               <p class="small"><span class="accent">{{article.author.firstname}} {{article.author.lastname}}</span> le {{ article.createdAt | date('d M Y à h:m')}}</p>
-              <div class="separator"></div>
-              <p>{{ article.content | slice(0, 200) }}...</p>
-              <div class="separator"></div>
-              <div class="article-action">
-                <a class="small" href="">Partager</a>
-                <a class="small" href="">Commenter</a>
-              </div>
             </div>
-          </a>
+            <div class="separator"></div>
+            <div class="article-content">
+              <p>{{ article.content | slice(0, 100) }}...</p>
+            </div>
+            {# <div class="separator"></div>
+            <div class="article-action">
+              <a class="small" href="">Partager</a>
+              <a class="small" href="">Commenter</a>
+            </div> #}
+          </div>
         </div>
+        </a>
       {% endfor %}
     </div>
   </div>

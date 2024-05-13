@@ -52,7 +52,14 @@ body {
 
 .accent {
   font-size: 1.7rem;
-  a{
+  a {
     color: var(--primary);
   }
+}
+
+.category {
+  padding: 1rem 1.5rem;
+  border-radius: 25px;
+  background: var(--primary);
+  color: white;
 }
