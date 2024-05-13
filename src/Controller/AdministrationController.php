@@ -27,7 +27,8 @@ class AdministrationController extends AbstractController
             'controller_name' => 'AdministrationController',
             'articles' => $articles,
             'events' => $events,
-            'users' => $users
+            'users' => $users,
+            'user' => $user
         ]);
     }
 

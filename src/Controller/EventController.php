@@ -16,9 +16,11 @@ class EventController extends AbstractController
     #[Route('/event', name: 'event')]
     public function index(EventRepository $eventRepo): Response
     {
+        $user = $this->getUser();
         $events = $eventRepo->findAll();
         return $this->render('event/index.html.twig', [
-            'events' => $events
+            'events' => $events,
+            'user' => $user
         ]);
     }
 
@@ -29,6 +31,16 @@ class EventController extends AbstractController
         $eventForm = $this->createForm(EventType::class, $event);
         $eventForm->handleRequest($request);
         if($eventForm->isSubmitted() && $eventForm->isValid()){
+
+            $picture = $eventForm->get('pictureFile')->getData();
+            $folder = $this->getParameter('event.folder');
+            $ext = $picture->guessExtension();
+            $filename = bin2hex(random_bytes(10)) . '.' . $ext;
+            $picture->move($folder, $filename);
+            $event->setPicture($this->getParameter('event.folder.public_path') . '/events/' . $filename);
+
+
+
             $event->setAuthor($user);
             $em->persist($event);
             $em->flush();
@@ -36,7 +48,8 @@ class EventController extends AbstractController
             return $this->redirectToRoute('event');
         }
         return $this->render('event/add.html.twig', [
-            'form' => $eventForm->createView()
+            'form' => $eventForm->createView(),
+            'user' => $user
         ]);
     }
 

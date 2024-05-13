@@ -19,9 +19,11 @@ class ArticleController extends AbstractController
     #[Route('/article', name: 'articles_show')]
     public function index(ArticleRepository $articlesRepo): Response
     {
+        $user = $this->getUser();
         $articles = $articlesRepo->findAll();   
         return $this->render('article/index.html.twig', [
-            'articles' => $articles
+            'articles' => $articles,
+            'user' => $user
         ]);
     }
 
@@ -33,6 +35,15 @@ class ArticleController extends AbstractController
         $articleForm = $this->createForm(ArticleType::class, $article);
         $articleForm->handleRequest($request);
         if($articleForm->isSubmitted() && $articleForm->isValid()){
+
+            $picture = $articleForm->get('pictureFile')->getData();
+            $folder = $this->getParameter('article.folder');
+            $ext = $picture->guessExtension();
+            $filename = bin2hex(random_bytes(10)) . '.' . $ext;
+            $picture->move($folder, $filename);
+            $article->setPicture($this->getParameter('article.folder.public_path') . '/articles/' . $filename);
+
+
             $article->setCreatedAt(new \DateTimeImmutable());
             $article->setAuthor($user);
             $em->persist($article);
@@ -41,7 +52,8 @@ class ArticleController extends AbstractController
             return $this->redirectToRoute('articles_show');
         }
         return $this->render('article/new.html.twig',[
-            'form' => $articleForm->createView()
+            'form' => $articleForm->createView(),
+            'user' => $user
         ]);
     }
 

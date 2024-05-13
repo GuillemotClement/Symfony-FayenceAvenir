@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="content flex row-wrap">
+    {% for event in events %}
+    <h3>{{event.name}}</h3>
+    <img src="{{ event.picture}}" alt="">
+{% endfor %}
+</div>
+
+{% endblock %}

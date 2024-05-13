@@ -5,7 +5,9 @@ namespace App\Form;
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class EventType extends AbstractType
 {
@@ -18,7 +20,19 @@ class EventType extends AbstractType
             ])
             ->add('adresse')
             ->add('content')
-            ->add('picture')
+            ->add('pictureFile', FileType::class, [
+                'label'=>'Image',
+                'mapped' => false,
+                'constraints' => [
+                    new Image(
+                        [
+                            'mimeTypesMessage'=> 'Veuillez soumettre une image',
+                            'maxSize' => '2M',
+                            'maxSizeMessage' => 'Image trop lourde. La limite est de {{ limite}} {{ suffix }}'
+                        ]
+                    )
+                ]
+            ])
         ;
     }
 
