@@ -25,10 +25,13 @@
             {{ form_errors(form.content) }}
           </div>
           <div class="form-row">
-            {{ form_rest(form)}}
+            {{ form_label(form.pictureFile) }}
+            {{ form_widget(form.pictureFile) }}
+            {{ form_errors(form.pictureFile) }}
           </div>
-          <div class="action">
+          <div class="form-action">
             <button class="btn btn-primary">Valider</button>
+            <a class="btn btn-warning" href="{{ path('home')}}">Annuler</a>
           </div>
         {{ form_end(form) }}
       </div>
