@@ -3,81 +3,17 @@
 {% block title %}Hello AdministrationController!{% endblock %}
 
 {% block body %}
-<div class="content">
-<div class="administration">
-	<div class="sidebar">
-		<ul>
-			<li><a href="#article">Mes Articles</a></li>
-			<ul>
-				<li><a href="{{ path('article_new')}}" class="small">Ajouter article</a></li>
-			</ul>
-			<div class="separator"></div>
-			<li><a href="">Mes Evènements</a></li>
-			<ul>
-				<li><a href="{{ path('add_event')}}" class="small">Ajouter Evènement</a></li>
-			</ul>
-		</ul>
+	<div class="content b1">
+		<h1>Panneau d'administration</h1>
+		<div class="divUnamed flex column b1">
+			<div class="sidebar b2">
+				sidebar
+			</div>
+			<div class="administration b3">
+				administration
+			</div>
+		</div>
+		
 	</div>
-	<div class="content-edit">
-		<div class="article-edit">
-			<h2 id="article">Mes Article</h2>
-			<div class="article-list">
-				{% for article in articles %}
-					<div class="ctn-article">
-							<div class="article-img">
-								<img src="{{ article.picture }}" alt="">
-							</div>
-							<div class="article-content">
-								<h3>{{ article.title }}</h3>
-								<div class="separator"></div>
-								<p>{{ article.content | slice(0, 50|trim) ~ '...' }}</p>
-								<div class="action">
-									<a href="{{ path('article_show', {id: article.id}) }}" class="btn btn-primary btn-small">Show</a>
-									<a href="" class="btn btn-warning btn-small">Editer</a>
-									<a href="{{ path('article_delete', {id: article.id}) }}" class="btn btn-danger btn-small">Supprimer</a>
-								</div>
-							</div>
-					</div>
-				{% endfor %}
-			</div>
-		</div>
-		<div class="event-edit">
-			<h2>Mes Evenement</h2>
-			<div class="event-list">
-				{% for event in events %}
-				<div class="event">
-					<h3>{{ event.name }}</h3>
-					<img src="{{ asset(event.picture)}}" alt="">
-					<p class="event-date small">Prévue le {{ event.date|date('d M Y h:m')}}</p>	
-					<p class="event-content">{{ event.content }}</p>	
-					<div class="event-action">
-						<a href="{{ path('show_event', { name: event.name }) }}" class="btn btn-primary btn-small">Voir</a>
-						<a href="" class="btn btn-warning btn-small">Editer</a>
-						<a href="{{ path('delete_event', { id: event.id }) }}" class="btn btn-danger btn-small">Supprimer</a>
-					</div>
-				</div>
-				{% endfor %}
-			</div>
-		</div>
-		<div class="user-edit">
-			<h2>Utilisateur</h2>
-			<div class="user-list flex row">
-				{% for user in users %}
-					<div class="user mr-15">
-						<h3>{{ user.firstname}} {{user.lastname}}</h3>
-						<a href="{{path('add_role_user', { id: user.id }) }}">Modifier rôle</a>
-						<ul>
-							{% for role in user.roles %}
-								<li>Role : {{ role }}</li>
-							{% endfor %}
-						</ul>
-						<a href="{{ path('delete_user', { id: user.id }) }}" class="small">Supprimer User</a>
-					</div>
-				{% endfor %}
-			</div>
-		</div>
-	</div>
-</div>
-</div>
 
 {% endblock %}
