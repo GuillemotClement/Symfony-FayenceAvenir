@@ -48,6 +48,17 @@ class AdministrationController extends AbstractController
     //     ]);
     // }
 
+    #[Route('administration/showUser', name: 'show_user')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function showUser(UserRepository $userRepo)
+    {
+        $users = $userRepo->findAll();
+
+        return $this->render('administration/showUser.html.twig', [
+            'users' => $users
+        ]);
+    }
+
     #[Route('administration/userRole/{id}', name: 'add_role_user')]
     #[IsGranted('ROLE_ADMIN')]
     public function addRole(UserRepository $userRepo, EntityManagerInterface $em, ?int $id, Request $request)
@@ -69,6 +80,7 @@ class AdministrationController extends AbstractController
     }
 
     #[Route('administration/user/delete/{id}', name: 'delete_user')]
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteUser(UserRepository $userRepository, ?int $id, EntityManagerInterface $em)
     {
         $user = $userRepository->find($id);

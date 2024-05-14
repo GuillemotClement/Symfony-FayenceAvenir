@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="content">
+	<div class="administration flex ">
+			<div class="sidebar py20">
+				<ul class="flex column align-center">
+					<li class="mb20">
+						<h3>Articles</h3>
+						<a class="small" href="{{ path('article_new')}}">Ajouter article</a>
+					</li>
+					<li class="mb20">
+						<h3>Evènements</h3>
+						<a class="small" href="{{ path('add_event')}}">Ajouter évènement </a>
+					</li>
+					<li class="mb20">
+						<h3>Utilisateurs</h3>
+						<a class="small" href="{{ path('show_user')}}">Modifier utilisateurs</a>
+					</li>
+				</ul>
+			</div>
+			<div class="administration-main fill p20">
+			<h1 class="administration-title center capitalize">Panneau administration</h1>
+				<div class="administration-edit">
+					<h2 class="center">Utilisateurs</h2>
+					<div class="administration-list">
+						{% for user in users %}
+							<div class="administration-element mb20 flex align-center justify-between p20">
+								<div class="administration-element-content">
+									<p class="mr20 element-text capitalize mb10">{{ user.firstname }} {{ user.lastname }}</p>
+                  <div class="separator"></div>
+                  <ul class="small">
+                    {% for role in user.roles %}
+                      <li>{{role}}</li>
+                      <div class="separator"></div>
+                    {% endfor %}
+                  </ul>
+								</div>
+								<div class="administration-element-action  ">
+									<a class="btn btn-small btn-warning mr5" href="{{ path('add_role_user', {id: user.id})}}">Modifier le rôle</a>
+									<a class="btn btn-small btn-danger" href="{{ path('delete_user', { id: user.id })}}">Supprimer</a>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdministrationController!{% endblock %}
-
 {% block body %}
 <div class="content">
 	<div class="administration flex ">
@@ -9,15 +7,15 @@
 				<ul class="flex column align-center">
 					<li class="mb20">
 						<h3>Articles</h3>
-						<a class="small" href="">Ajouter article</a>
+						<a class="small" href="{{ path('article_new')}}">Ajouter article</a>
 					</li>
 					<li class="mb20">
 						<h3>Evènements</h3>
-						<a class="small" href="">Ajouter évènement </a>
+						<a class="small" href="{{ path('add_event')}}">Ajouter évènement </a>
 					</li>
 					<li class="mb20">
 						<h3>Utilisateurs</h3>
-						<a class="small"href="">Modifier utilisateurs</a>
+						<a class="small" href="{{ path('show_user')}}">Modifier utilisateurs</a>
 					</li>
 				</ul>
 			</div>
@@ -34,7 +32,7 @@
 								</div>
 								<div class="administration-element-action  ">
 									<a class="btn btn-small btn-warning mr5" href="">Editer</a>
-									<a class="btn btn-small btn-danger" href="">Supprimer</a>
+									<a class="btn btn-small btn-danger" href="{{ path('article_delete', {id: article.id})}}">Supprimer</a>
 								</div>
 							</div>
 						{% endfor %}
@@ -52,7 +50,7 @@
 								</div>
 								<div class="administration-element-action  ">
 									<a class="btn btn-small btn-warning mr5" href="">Editer</a>
-									<a class="btn btn-small btn-danger" href="">Supprimer</a>
+									<a class="btn btn-small btn-danger" href="{{ path('delete_event', {id: event.id}) }}">Supprimer</a>
 								</div>
 							</div>
 						{% endfor %}
