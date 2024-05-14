@@ -17,4 +17,17 @@
     border: 1px solid white;
     color: white;
   }
+  &-small {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+  &-danger {
+    color: white;
+    background: var(--danger);
+  }
+  &-warning {
+    color: white;
+    background: var(--warning);
+  }
 }

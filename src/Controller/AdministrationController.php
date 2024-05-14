@@ -16,21 +16,37 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class AdministrationController extends AbstractController
 {
     #[Route('/administration', name: 'administration')]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(ArticleRepository $articleRepo, EventRepository $eventRepo, UserRepository $userRepo): Response
     {
          /** @var \App\Entity\User $user */
-        $user = $this->getUser();
-        $users = $userRepo->findAll();
-        $articles = $articleRepo->findBy(['author' => $user]);
-        $events = $eventRepo->findBy(['author' => $user]);
+        // $user = $this->getUser();
+        // $users = $userRepo->findAll();
+        $articles = $articleRepo->findAll();
+        $events = $eventRepo->findAll();
         return $this->render('administration/index.html.twig', [
-            'controller_name' => 'AdministrationController',
             'articles' => $articles,
             'events' => $events,
-            'users' => $users,
-            'user' => $user
         ]);
     }
+
+    // route for only user writer
+    // #[Route('/administration', name: 'administration')]
+    // public function index(ArticleRepository $articleRepo, EventRepository $eventRepo, UserRepository $userRepo): Response
+    // {
+    //      /** @var \App\Entity\User $user */
+    //     $user = $this->getUser();
+    //     $users = $userRepo->findAll();
+    //     $articles = $articleRepo->findBy(['author' => $user]);
+    //     $events = $eventRepo->findBy(['author' => $user]);
+    //     return $this->render('administration/index.html.twig', [
+    //         'controller_name' => 'AdministrationController',
+    //         'articles' => $articles,
+    //         'events' => $events,
+    //         'users' => $users,
+    //         'user' => $user
+    //     ]);
+    // }
 
     #[Route('administration/userRole/{id}', name: 'add_role_user')]
     #[IsGranted('ROLE_ADMIN')]

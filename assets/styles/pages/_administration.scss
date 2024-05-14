@@ -1,0 +1,18 @@
+.administration {
+  background-color: white;
+  box-shadow: var(--shadow);
+  border-radius: 5px;
+  height: 100%;
+  .sidebar {
+    width: 200px;
+    height: 100%;
+    border: 2px solid var(--gray-light);
+  }
+  &-element {
+    border: 2px solid var(--gray-light);
+    width: 100%;
+    .element-text {
+      font-size: 1.4rem;
+    }
+  }
+}

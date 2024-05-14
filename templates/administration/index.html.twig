@@ -3,17 +3,62 @@
 {% block title %}Hello AdministrationController!{% endblock %}
 
 {% block body %}
-	<div class="content b1">
-		<h1>Panneau d'administration</h1>
-		<div class="divUnamed flex column b1">
-			<div class="sidebar b2">
-				sidebar
+<div class="content">
+	<div class="administration flex ">
+			<div class="sidebar py20">
+				<ul class="flex column align-center">
+					<li class="mb20">
+						<h3>Articles</h3>
+						<a class="small" href="">Ajouter article</a>
+					</li>
+					<li class="mb20">
+						<h3>Evènements</h3>
+						<a class="small" href="">Ajouter évènement </a>
+					</li>
+					<li class="mb20">
+						<h3>Utilisateurs</h3>
+						<a class="small"href="">Modifier utilisateurs</a>
+					</li>
+				</ul>
 			</div>
-			<div class="administration b3">
-				administration
+			<div class="administration-main fill p20">
+			<h1 class="administration-title center capitalize">Panneau administration</h1>
+				<div class="administration-edit">
+					<h2 class="center">Article</h2>
+					<div class="administration-list">
+						{% for article in articles %}
+							<div class="administration-element mb20 flex align-center justify-between p20">
+								<div class="administration-element-content">
+									<p class="mr20 element-text">{{ article.title | slice(0, 60)}}...</p>
+									<p class="small">Ecrit le {{article.createdAt | date('d M Y')}} par <span class="author">{{ article.author.firstname }} {{ article.author.lastname }}</span></p>
+								</div>
+								<div class="administration-element-action  ">
+									<a class="btn btn-small btn-warning mr5" href="">Editer</a>
+									<a class="btn btn-small btn-danger" href="">Supprimer</a>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="separator"></div>
+				<div class="administration-edit">
+					<h2 class="center">Evènements</h2>
+					<div class="administration-list">
+						{% for event in events %}
+							<div class="administration-element mb20 flex align-center justify-between p20">
+								<div class="administration-element-content">
+									<p class="mr20 element-text">{{ event.name | slice(0, 60)}}...</p>
+									<p class="small">Prévu le {{event.date | date('d M Y')}} à {{ event.adresse }}</span></p>
+								</div>
+								<div class="administration-element-action  ">
+									<a class="btn btn-small btn-warning mr5" href="">Editer</a>
+									<a class="btn btn-small btn-danger" href="">Supprimer</a>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
 			</div>
-		</div>
-		
 	</div>
-
+</div>
 {% endblock %}
