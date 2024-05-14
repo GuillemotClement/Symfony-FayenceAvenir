@@ -53,10 +53,10 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('event/show/{name}', name: 'show_event')]
-    public function showEvent(?string $name, EventRepository $eventRepo)
+    #[Route('event/show/{id}', name: 'show_event')]
+    public function showEvent(?string $id, EventRepository $eventRepo)
     {
-        $event = $eventRepo->findOneBy(['name' => $name]);
+        $event = $eventRepo->find($id);
         return $this->render('event/show.html.twig', [
             'event' => $event
         ]);

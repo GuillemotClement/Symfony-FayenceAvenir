@@ -2,18 +2,18 @@
 
 {% block body %}
 <div class="content">
-  <div class="articles">
-    <h2>Nos dernier articles</h2>
-    <div class="article-list">
+  <div class="cards">
+    <h2 class="cards-title">Nos dernier articles</h2>
+    <div class="card-list">
       {% for article in articles %}
         <a href="{{ path('article_show', { id: article.id}) }}">
-        <div class="article">
-          <div class="article-picture">
+        <div class="card">
+          <div class="card-picture">
             <img src="{{ article.picture}}" alt="image article {{ article.title }}">
           </div>
-          <div class="article-content">
-            <h3 class="article-title">{{ article.title }}</h3>
-            <div class="article-info">
+          <div class="card-content">
+            <h3 class="card-title">{{ article.title }}</h3>
+            <div class="card-info">
               <p class="small category">{{ article.category | replace({
                 'politic': 'Politique',
                 'nature': 'Nature', 
@@ -24,7 +24,7 @@
               <p class="small"><span class="accent">{{article.author.firstname}} {{article.author.lastname}}</span> le {{ article.createdAt | date('d M Y à h:m')}}</p>
             </div>
             <div class="separator"></div>
-            <div class="article-content">
+            <div class="card-text">
               <p>{{ article.content | slice(0, 100) }}...</p>
             </div>
             {# <div class="separator"></div>
@@ -38,22 +38,24 @@
       {% endfor %}
     </div>
   </div>
-  <div class="events">
-    <h2>Nos prochains évènements</h2>
-    <div class="event-list">
+  <div class="cards">
+    <h2 class="cards-title">Nos prochains évènements</h2>
+    <div class="card-list">
       {% for event in events %}
-          <a href="">
-          <div class="event">
-            <div class="event-picture">
+          <a href="{{ path('show_event', { id: event.id})}}">
+          <div class="card">
+            <div class="card-picture">
               <img src="{{ event.picture}}" alt="">
             </div>
-            <div class="event-content">
-              <h3 class="event-title">{{ event.name }}</h3>
+            <div class="card-content">
+              <h3 class="card-title">{{ event.name }}</h3>
               <p>Date : {{ event.date | date('d M Y à h:m')}}</p>
               <p>Addresse : {{ event.adresse }}</p>
               <div class="separator"></div>
-              <p>{{ event.content | slice(0, 200) }}...</p>
-              <div class="separator"></div>
+              <div class="card-text">
+                <p>{{ event.content | slice(0, 200) }}...</p>
+              </div>
+              {# <div class="separator"></div> #}
               {# <div class="event-action">
                 <a class="small" href="">Ajouter à l'agenda</a>
               </div> #}

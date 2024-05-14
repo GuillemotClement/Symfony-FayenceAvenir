@@ -1,0 +1,64 @@
+.cards {
+  background: white;
+  padding: 4rem 2rem;
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+  margin-bottom: 4rem;
+  .cards-title {
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .card-list {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    gap: 2rem;
+  }
+  .card {
+    width: 40rem;
+    border: 1px solid var(--gray-light);
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    :hover {
+      img {
+        transform: scale(1.1);
+      }
+      .article-title {
+        color: var(--primary);
+      }
+    }
+    .card-picture {
+      height: 30rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      img {
+        transition: transform 1s;
+      }
+    }
+    .card-content {
+      padding: 1rem 1.5rem;
+      .card-title {
+        text-align: justify;
+      }
+    }
+    .card-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+    .card-action {
+      display: flex;
+      justify-content: center;
+      a {
+        margin-right: 3rem;
+      }
+    }
+  }
+}
