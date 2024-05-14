@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="content">
-  <h1>Nos articles</h1>
+  <h1 class="center capitalize">Nos articles</h1>
   <ul class="article-filter">
     <li><a href="{{ path('articles_show')}}">Tous</a></li>
     <li><a href="{{ path('article_show_category', {category: 'politic'})}}"><i class="fa-solid fa-landmark"></i>Politique</a></li>
@@ -13,35 +13,45 @@
     <li><a href="{{ path('article_show_category', {category: 'sport'})}}"><i class="fa-solid fa-person-running"></i>Sport</a></li>
     <li><a href="{{ path('article_show_category', {category: 'work'})}}"><i class="fa-solid fa-person-digging"></i>Emploi</a></li>
   </ul>
-  <div class="article-list">
+  <div class="cards">
+    <div class="card-list">
     {% for article in articles %}
-    <a href="{{ path('article_show', {id: article.id})}}">
-      <div class="article-ctn" href="">
-        <div class="article-picture">
-          <img src="{{ article.picture }}" alt="image article {{article.title}}">
-        </div>
-        <div class="article-content">
-          <h2 class="title">{{ article.title }}</h2>
-          <div class="separator"></div>
-          <p class='category'>{{ article.category }}</p>
-          <p class="info"><span class="author"></span> - <span class="date">{{ article.createdAt | date('F j, Y, g:i a') }}</span></p>
-          <p class="article-ctn-content">{{ article.content | slice(0, 50) }}...</p>  
-          <a href="{{ path('article_show', {id: article.id})}}">Lire l'article</a>
-        </div>
-        <div class="separator"></div>
-        <div class="article-action flex justify-between">
-          <div class="article-comment">
-            <a href="{{ path('add_response', { id: article.id }) }}" class="small">Commenter</a>
-            {# <span class="count">5</span> #}
+      <a href="{{ path('article_show', {id: article.id})}}">
+        <div class="card">
+          <div class="card-picture">
+            <img src="{{ article.picture }}" alt="image article {{article.title}}">
           </div>
-          <div class="article-share">
-            <a class="small" href="">Partager</a>
+          <div class="card-content">
+            <h2 class="card-title">{{ article.title }}</h2>
+            <div class="separator"></div>
+            <div class="card-info">
+              <p class="small category">{{ article.category | replace({
+                'politic': 'Politique',
+                'nature': 'Nature', 
+                'food': 'Gastonomie', 
+                'sport': 'Sport', 
+                'work': 'Emploi' 
+              })}}</p>
+              <p class="small"><span class="accent">{{article.author.firstname}} {{article.author.lastname}}</span> le {{ article.createdAt | date('d M Y à h:m')}}</p>
+            </div>
+            <div class="card-text">
+              <p>{{ article.content | slice(0, 100) }}...</p>
+            </div>
           </div>
-        </div>
-          
-      </div> 
-    </a>
+          {# <div class="separator"></div>
+          <div class="article-action flex justify-between">
+            <div class="article-comment">
+              <a href="{{ path('add_response', { id: article.id }) }}" class="small">Commenter</a>
+              {# <span class="count">5</span> #}
+            {# </div>
+            <div class="article-share">
+              <a class="small" href="">Partager</a>
+            </div>
+          </div> #} 
+        </div> 
+      </a>
     {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}

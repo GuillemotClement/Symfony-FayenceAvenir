@@ -1,11 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="content flex row-wrap">
-    {% for event in events %}
-    <h3>{{event.name}}</h3>
-    <img src="{{ event.picture}}" alt="">
-{% endfor %}
+<div class="content">
+	<div class="cards">
+		<h1 class="center">Agenda</h1>
+		<div class="card-list">
+			{% for event in events %}
+			<div class="card">
+				<div class="card-picture">
+					<img src="{{ event.picture }}" alt="">
+				</div>
+				<div class="card-content">
+					<h2 class="card-title">{{event.name}}</h2>
+					<div class="separator mb20"></div>
+					<p class="mb10"><span class="bold">Adresse</span> : {{ event.adresse }}</p>
+					<p class="mb10"><span class="bold">Date</span> : {{ event.date | date('d M Y à h:m')}}</p>
+					<p class="mb10"><span class="bold">Sujet</span> : {{ event.content}}</p>
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
 </div>
-
 {% endblock %}
