@@ -15,6 +15,7 @@ body {
 }
 .content {
   max-width: var(--max-width);
+  // min-width: 100%;
   // padding-top: 2rem;
   // padding: 20rem;
 }
@@ -67,5 +68,3 @@ body {
 .bold {
   font-weight: 700;
 }
-
-
