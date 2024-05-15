@@ -8,11 +8,13 @@
       </div>
       <div class="article-info">
         <p class="category">{{ article.category | replace({
-          'politic': 'Politique',
-          'nature': 'Nature', 
-          'food': 'Gastonomie', 
+          'culture': 'Culture/Animation',
+          'societal': 'Sociétal', 
+          'environment': 'Environnement', 
           'sport': 'Sport', 
-          'work': 'Emploi' 
+          'energy': 'Energie', 
+          'agriculture': 'Agriculture', 
+          'tourism': 'Tourisme', 
         }) }}</p>
         <p class="article-date small">Ecrit le {{ article.createdAt | date('d M Y à h:m')}} par <span class="author">{{article.author.firstname}} {{article.author.firstname}}</span></p>
       </div>

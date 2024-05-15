@@ -7,11 +7,13 @@
   <h1 class="center capitalize">Nos articles</h1>
   <ul class="article-filter">
     <li><a href="{{ path('articles_show')}}">Tous</a></li>
-    <li><a href="{{ path('article_show_category', {category: 'politic'})}}"><i class="fa-solid fa-landmark"></i>Politique</a></li>
-    <li><a href="{{ path('article_show_category', {category: 'nature'})}}"><i class="fa-solid fa-tree"></i>Nature</a></li>
-    <li><a href="{{ path('article_show_category', {category: 'food'})}}"><i class="fa-solid fa-utensils"></i>Gastronomie</a></li>
+    <li><a href="{{ path('article_show_category', {category: 'culture'})}}"><i class="fa-solid fa-masks-theater"></i></i>Culture/Animation</a></li>
+    <li><a href="{{ path('article_show_category', {category: 'societal'})}}"><i class="fa-solid fa-comments"></i>Sociétal</a></li>
+    <li><a href="{{ path('article_show_category', {category: 'environment'})}}"><i class="fa-solid fa-leaf"></i></i>Environnement</a></li>
     <li><a href="{{ path('article_show_category', {category: 'sport'})}}"><i class="fa-solid fa-person-running"></i>Sport</a></li>
-    <li><a href="{{ path('article_show_category', {category: 'work'})}}"><i class="fa-solid fa-person-digging"></i>Emploi</a></li>
+    <li><a href="{{ path('article_show_category', {category: 'energy'})}}"><i class="fa-solid fa-faucet-drip"></i>Energie</a></li>
+    <li><a href="{{ path('article_show_category', {category: 'agriculture'})}}"><i class="fa-solid fa-wheat-awn"></i></i>Agriculture</a></li>
+    <li><a href="{{ path('article_show_category', {category: 'tourism'})}}"><i class="fa-solid fa-suitcase-rolling"></i>Tourisme</a></li>
   </ul>
   <div class="cards">
     <div class="card-list">
@@ -26,11 +28,13 @@
             <div class="separator"></div>
             <div class="card-info">
               <p class="small category">{{ article.category | replace({
-                'politic': 'Politique',
-                'nature': 'Nature', 
-                'food': 'Gastonomie', 
+                'culture': 'Culture/Animation',
+                'societal': 'Sociétal', 
+                'environment': 'Environnement', 
                 'sport': 'Sport', 
-                'work': 'Emploi' 
+                'energy': 'Energie', 
+                'agriculture': 'Agriculture', 
+                'tourism': 'Tourisme', 
               })}}</p>
               <p class="small"><span class="accent">{{article.author.firstname}} {{article.author.lastname}}</span> le {{ article.createdAt | date('d M Y à h:m')}}</p>
             </div>

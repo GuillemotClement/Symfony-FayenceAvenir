@@ -20,13 +20,14 @@ class AdministrationController extends AbstractController
     public function index(ArticleRepository $articleRepo, EventRepository $eventRepo, UserRepository $userRepo): Response
     {
          /** @var \App\Entity\User $user */
-        // $user = $this->getUser();
+        $user = $this->getUser();
         // $users = $userRepo->findAll();
         $articles = $articleRepo->findAll();
         $events = $eventRepo->findAll();
         return $this->render('administration/index.html.twig', [
             'articles' => $articles,
             'events' => $events,
+            'user' => $user
         ]);
     }
 

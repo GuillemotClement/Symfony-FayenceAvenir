@@ -41,11 +41,13 @@ class ArticleType extends AbstractType
             ])
             ->add('category', ChoiceType::class, [
                 'choices' => [
-                    'Politique' => 'politic',
-                    'Nature' => 'nature',
-                    'Gastonomie' => "food",
+                    'Culture/Animation' => 'culture',
+                    'Societal' => 'societal',
+                    'Environnement' => "environment",
                     'Sport' => 'sport',
-                    'Emploi' => 'work'
+                    'Energie' => 'energy',
+                    'Agriculture' => 'agriculture',
+                    'Tourisme' => 'tourism',
                 ],
                 'label' => 'Catégorie',
             ]);
