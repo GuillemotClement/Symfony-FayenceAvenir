@@ -29,18 +29,22 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/article/edit/{id}', name: 'article_edit')]
+    // Création d'un nouvel article
     #[Route('/article/new', name: 'article_new')]
     public function newArticle(Request $request, EntityManagerInterface $em, Uploader $uploader)
     {
         $user = $this->getUser();
+        // création d'un nouvel article
         $article = new Article();
+        // Création d'un nouveau formulaire
         $articleForm = $this->createForm(ArticleType::class, $article);
+        //On récupère la requête
         $articleForm->handleRequest($request);
         if($articleForm->isSubmitted() && $articleForm->isValid()){
             // gestion envoi image
-            
+            //on récupère la nouvelle image du formulaire
             $picture = $articleForm->get('pictureFile')->getData();
+            //si on as bien une photo, on change la photo et on supprime l'ancienne
             if($picture){
                 $article->setPicture($uploader->uploadArticleImage($picture, $article->getPicture()));
             }
@@ -56,6 +60,39 @@ class ArticleController extends AbstractController
             'user' => $user
         ]);
     }
+
+    // Edition d'un article
+    #[Route('/article/edit/{id}', name: 'article_edit')]
+    public function editArticle(Request $request, ArticleRepository $articleRepository, EntityManagerInterface $em, ?int $id, Uploader $uploader)
+    {
+        $user = $this->getUser();
+        $article = $articleRepository->find($id);
+        $articleForm = $this->createForm(ArticleType::class, $article);
+        $articleForm->handleRequest($request);
+
+        if($articleForm->isSubmitted() && $articleForm->isValid()){
+            $picture = $articleForm->get('pictureFile')->getData();
+            $oldPicture = $article->getPicture();
+            if($picture){
+                $article->setPicture($uploader->uploadArticleImage($picture, $oldPicture));
+            }
+            $em->persist($article);
+            $em->flush();
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('article/new.html.twig',[
+            'form' => $articleForm->createView(),
+            'user' => $user
+        ]);
+    }
+
+
+
+
+
+
+    
     //création d'un nouvel article
     // #[Route('/article/new', name: 'article_new')]
     // #[Route('/article/edit/{id}', name: 'article_edit')]

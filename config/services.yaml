@@ -9,7 +9,7 @@ parameters:
   article.folder: "%kernel.project_dir%/public/build/images/uploads/articles"
   article.folder.public_path: "build/images/uploads/articles"
   event.folder: "%kernel.project_dir%/public/build/images/uploads/events"
-  event.folder.public_path: "/images/uploads/events/"
+  event.folder.public_path: "build/images/uploads/events/"
 
 services:
   # default configuration for services in *this* file
@@ -39,3 +39,5 @@ services:
       $profileFolderPublic: "%profile.folder.public_path%"
       $articleFolder: "%article.folder%"
       $articleFolderPublic: "%article.folder.public_path%"
+      $eventFolder: "%event.folder%"
+      $eventFolderPublic: "%event.folder.public_path%"
