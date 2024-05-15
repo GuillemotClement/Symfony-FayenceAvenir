@@ -4,15 +4,18 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Form\EventType;
+use App\Service\Uploader;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EventController extends AbstractController
 {
+    // Affichage des évènement
     #[Route('/event', name: 'event')]
     public function index(EventRepository $eventRepo): Response
     {
@@ -24,27 +27,22 @@ class EventController extends AbstractController
         ]);
     }
 
+    // ajouter un nouvel event
     #[Route('/event/new', name: 'add_event')]
-    public function addEvent(EntityManagerInterface $em, Request $request){
+    public function addEvent(EntityManagerInterface $em, Request $request, Uploader $uploader){
         $user = $this->getUser();
         $event = new Event();
         $eventForm = $this->createForm(EventType::class, $event);
         $eventForm->handleRequest($request);
         if($eventForm->isSubmitted() && $eventForm->isValid()){
-
             $picture = $eventForm->get('pictureFile')->getData();
-            $folder = $this->getParameter('event.folder');
-            $ext = $picture->guessExtension();
-            $filename = bin2hex(random_bytes(10)) . '.' . $ext;
-            $picture->move($folder, $filename);
-            $event->setPicture($this->getParameter('event.folder.public_path') . '/events/' . $filename);
-
-
-
+            if($picture){
+                $event->setPicture($uploader->uploadEventImage($picture));
+            }
             $event->setAuthor($user);
             $em->persist($event);
             $em->flush();
-            $this->addFlash('success', 'Evenement ajouter avec succes');
+            // $this->addFlash('success', 'Evenement ajouter avec succes');
             return $this->redirectToRoute('event');
         }
         return $this->render('event/add.html.twig', [
@@ -53,6 +51,33 @@ class EventController extends AbstractController
         ]);
     }
 
+    // editer un event
+    #[Route('/event/edit/{id}', name:'edit_event')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function editEvent(Request $request, EventRepository $eventRepository, EntityManagerInterface $em, ?int $id, Uploader $uploader)
+    {
+        $user = $this->getUser();
+        $event = $eventRepository->find($id);
+        $eventForm = $this->createForm(EventType::class, $event);
+        $eventForm->handleRequest($request);
+        if($eventForm->isSubmitted() && $eventForm->isValid()){
+            $picture = $eventForm->get('pictureFile')->getData();
+            $oldPicture = $event->getPicture();
+            if($picture){
+                $event->setPicture($uploader->uploadEventImage($picture, $oldPicture));
+            }
+            $em->persist($event);
+            $em->flush();
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('event/add.html.twig', [
+            'form' =>$eventForm->createView(),
+            'user' => $user
+        ]);
+    }
+    
+    // afficher un event précis
     #[Route('event/show/{id}', name: 'show_event')]
     public function showEvent(?string $id, EventRepository $eventRepo)
     {
@@ -62,6 +87,7 @@ class EventController extends AbstractController
         ]);
     }
 
+    // supprimer un event
     #[Route('event/delete/{id}', name: 'delete_event')]
     public function deleteEvent(?int $id, EventRepository $eventRepo, EntityManagerInterface $em)
     {
