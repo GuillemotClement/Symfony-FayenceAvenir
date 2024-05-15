@@ -11,9 +11,9 @@
         {% if is_granted('ROLE_ADMIN') %}
           <a href="{{ path('administration')}}" class="btn btn-primary">Administration</a>
         {% endif %}
-        {# <a href="" class="">
-          <img class="avatar" src="{{ asset(user.picture) }}" alt="profil">
-        </a> #}
+        <a href="{{ path('edit_user', {id: app.user.id}) }}" class="">
+          <img class="avatar" src="{{ asset(app.user.picture) }}" alt="profil">
+        </a>
       {% else %}
         <a href="{{ path('login')}}" class="btn btn-primary">Connexion</a>
         <a href="{{ path('register')}}" class="btn btn-secondary">Inscription</a>
