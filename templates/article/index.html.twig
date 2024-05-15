@@ -21,7 +21,7 @@
       <a href="{{ path('article_show', {id: article.id})}}">
         <div class="card">
           <div class="card-picture">
-            <img src="{{ article.picture }}" alt="image article {{article.title}}">
+            <img src="{{ asset(article.picture) }}" alt="image article {{article.title}}">
           </div>
           <div class="card-content">
             <h2 class="card-title">{{ article.title }}</h2>

@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Repository\ResponseRepository;
+use App\Service\Uploader;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,9 +29,9 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    //création d'un nouvel article
+    #[Route('/article/edit/{id}', name: 'article_edit')]
     #[Route('/article/new', name: 'article_new')]
-    public function newArticle(Request $request, EntityManagerInterface $em)
+    public function newArticle(Request $request, EntityManagerInterface $em, Uploader $uploader)
     {
         $user = $this->getUser();
         $article = new Article();
@@ -38,12 +39,11 @@ class ArticleController extends AbstractController
         $articleForm->handleRequest($request);
         if($articleForm->isSubmitted() && $articleForm->isValid()){
             // gestion envoi image
+            
             $picture = $articleForm->get('pictureFile')->getData();
-            $folder = $this->getParameter('article.folder');
-            $ext = $picture->guessExtension();
-            $filename = bin2hex(random_bytes(10)) . '.' . $ext;
-            $picture->move($folder, $filename);
-            $article->setPicture($this->getParameter('article.folder.public_path') . '/articles/' . $filename);
+            if($picture){
+                $article->setPicture($uploader->uploadArticleImage($picture, $article->getPicture()));
+            }
             $article->setCreatedAt(new \DateTimeImmutable());
             $article->setAuthor($user);
             $em->persist($article);
@@ -56,6 +56,82 @@ class ArticleController extends AbstractController
             'user' => $user
         ]);
     }
+    //création d'un nouvel article
+    // #[Route('/article/new', name: 'article_new')]
+    // #[Route('/article/edit/{id}', name: 'article_edit')]
+    // public function newArticle(Uploader $uploader, Request $request, EntityManagerInterface $em, ?int $id, ArticleRepository $articleRepo)
+    // {
+    //     $user = $this->getUser();
+
+    //     // si on passe un id, on récupère article sinon on créer un nouveau
+    //     if($id){
+    //         $article = $articleRepo->find($id);
+    //     }else{
+    //         $article = new Article();
+    //     }
+
+    //     //création du formulaire
+    //     $articleForm = $this->createForm(ArticleType::class, $article);
+    //     //recupération de la requête
+    //     $articleForm->handleRequest($request);
+
+    //     //si formulaire est soumis et valide
+    //     if($articleForm->isSubmitted() && $articleForm->isValid()){
+    //         //on récupère l'image saisis par user
+    //         $picture = $articleForm->get('pictureFile')->getData();
+    //         //si id passé, on récupére le lien de l'ancienne picture et on ajoute en supprimant ancien
+    //         if($id){
+    //             $oldpicture = $article->getPicture();
+    //             $article->setPicture($uploader->uploadArticleImage($picture, $oldpicture));
+    //         }
+    //         //utilisation du service pour l'upload de la photo
+    //         $article->setPicture($uploader->uploadArticleImage($picture));
+    //         //si nouvel article 
+    //         if(!$id){
+    //             //ajout date de création
+    //             $article->setCreatedAt(new \DateTimeImmutable());
+    //             //ajout d'un auteur
+    //             $article->setAuthor($user);
+    //         }
+    //         $em->persist($article);
+    //         $em->flush();
+    //         // $this->addFlash('success', 'Article ajouté avec succès');
+    //         return $this->redirectToRoute('articles_show');
+    //     }
+    //     return $this->render('article/new.html.twig',[
+    //         'form' => $articleForm->createView(),
+    //         'user' => $user
+    //     ]);
+    // }
+
+    // //création d'un nouvel article
+    // #[Route('/article/new', name: 'article_new')]
+    // public function newArticle(Request $request, EntityManagerInterface $em)
+    // {
+    //     $user = $this->getUser();
+    //     $article = new Article();
+    //     $articleForm = $this->createForm(ArticleType::class, $article);
+    //     $articleForm->handleRequest($request);
+    //     if($articleForm->isSubmitted() && $articleForm->isValid()){
+    //         // gestion envoi image
+    //         $picture = $articleForm->get('pictureFile')->getData();
+    //         $folder = $this->getParameter('article.folder');
+    //         $ext = $picture->guessExtension();
+    //         $filename = bin2hex(random_bytes(10)) . '.' . $ext;
+    //         $picture->move($folder, $filename);
+    //         $article->setPicture($this->getParameter('article.folder.public_path') . '/articles/' . $filename);
+    //         $article->setCreatedAt(new \DateTimeImmutable());
+    //         $article->setAuthor($user);
+    //         $em->persist($article);
+    //         $em->flush();
+    //         $this->addFlash('success', 'Article ajouté avec succès');
+    //         return $this->redirectToRoute('articles_show');
+    //     }
+    //     return $this->render('article/new.html.twig',[
+    //         'form' => $articleForm->createView(),
+    //         'user' => $user
+    //     ]);
+    // }
 
     // Suppression article
     #[Route('/article/delete/{id}', name: 'article_delete')]

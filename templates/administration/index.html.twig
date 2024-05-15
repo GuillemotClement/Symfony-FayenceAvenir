@@ -31,7 +31,7 @@
 									<p class="small">Ecrit le {{article.createdAt | date('d M Y')}} par <span class="author">{{ article.author.firstname }} {{ article.author.lastname }}</span></p>
 								</div>
 								<div class="administration-element-action  ">
-									<a class="btn btn-small btn-warning mr5" href="">Editer</a>
+									<a class="btn btn-small btn-warning mr5" href="{{ path('article_edit', {id: article.id})}}">Editer</a>
 									<a class="btn btn-small btn-danger" href="{{ path('article_delete', {id: article.id})}}">Supprimer</a>
 								</div>
 							</div>
