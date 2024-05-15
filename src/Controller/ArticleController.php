@@ -17,11 +17,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArticleController extends AbstractController
 {
-    // Affichages de tous les articles
+    // Affichages de tous les articles du plus récent au plus ancien
     #[Route('/article', name: 'articles_show')]
     public function index(ArticleRepository $articlesRepo): Response
     {
         $user = $this->getUser();
+        // requête qui permet de récupérer les article du plus récent au plus vieux
         $articles = $articlesRepo->getArticleByDescCreated();   
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
@@ -44,7 +45,7 @@ class ArticleController extends AbstractController
             // gestion envoi image
             //on récupère la nouvelle image du formulaire
             $picture = $articleForm->get('pictureFile')->getData();
-            //si on as bien une photo, on change la photo et on supprime l'ancienne
+            //si on as bien une photo, on change la photo
             if($picture){
                 $article->setPicture($uploader->uploadArticleImage($picture, $article->getPicture()));
             }
@@ -52,7 +53,7 @@ class ArticleController extends AbstractController
             $article->setAuthor($user);
             $em->persist($article);
             $em->flush();
-            $this->addFlash('success', 'Article ajouté avec succès');
+            // $this->addFlash('success', 'Article ajouté avec succès');
             return $this->redirectToRoute('articles_show');
         }
         return $this->render('article/new.html.twig',[
@@ -69,11 +70,13 @@ class ArticleController extends AbstractController
         $article = $articleRepository->find($id);
         $articleForm = $this->createForm(ArticleType::class, $article);
         $articleForm->handleRequest($request);
-
         if($articleForm->isSubmitted() && $articleForm->isValid()){
+            // on récupère la picture via le formulaire
             $picture = $articleForm->get('pictureFile')->getData();
+            //on récupère l'ancienne photo
             $oldPicture = $article->getPicture();
             if($picture){
+                // on ajoute la nouvelle photo et on supprime l'ancienne
                 $article->setPicture($uploader->uploadArticleImage($picture, $oldPicture));
             }
             $em->persist($article);
@@ -87,89 +90,6 @@ class ArticleController extends AbstractController
         ]);
     }
 
-
-
-
-
-
-    
-    //création d'un nouvel article
-    // #[Route('/article/new', name: 'article_new')]
-    // #[Route('/article/edit/{id}', name: 'article_edit')]
-    // public function newArticle(Uploader $uploader, Request $request, EntityManagerInterface $em, ?int $id, ArticleRepository $articleRepo)
-    // {
-    //     $user = $this->getUser();
-
-    //     // si on passe un id, on récupère article sinon on créer un nouveau
-    //     if($id){
-    //         $article = $articleRepo->find($id);
-    //     }else{
-    //         $article = new Article();
-    //     }
-
-    //     //création du formulaire
-    //     $articleForm = $this->createForm(ArticleType::class, $article);
-    //     //recupération de la requête
-    //     $articleForm->handleRequest($request);
-
-    //     //si formulaire est soumis et valide
-    //     if($articleForm->isSubmitted() && $articleForm->isValid()){
-    //         //on récupère l'image saisis par user
-    //         $picture = $articleForm->get('pictureFile')->getData();
-    //         //si id passé, on récupére le lien de l'ancienne picture et on ajoute en supprimant ancien
-    //         if($id){
-    //             $oldpicture = $article->getPicture();
-    //             $article->setPicture($uploader->uploadArticleImage($picture, $oldpicture));
-    //         }
-    //         //utilisation du service pour l'upload de la photo
-    //         $article->setPicture($uploader->uploadArticleImage($picture));
-    //         //si nouvel article 
-    //         if(!$id){
-    //             //ajout date de création
-    //             $article->setCreatedAt(new \DateTimeImmutable());
-    //             //ajout d'un auteur
-    //             $article->setAuthor($user);
-    //         }
-    //         $em->persist($article);
-    //         $em->flush();
-    //         // $this->addFlash('success', 'Article ajouté avec succès');
-    //         return $this->redirectToRoute('articles_show');
-    //     }
-    //     return $this->render('article/new.html.twig',[
-    //         'form' => $articleForm->createView(),
-    //         'user' => $user
-    //     ]);
-    // }
-
-    // //création d'un nouvel article
-    // #[Route('/article/new', name: 'article_new')]
-    // public function newArticle(Request $request, EntityManagerInterface $em)
-    // {
-    //     $user = $this->getUser();
-    //     $article = new Article();
-    //     $articleForm = $this->createForm(ArticleType::class, $article);
-    //     $articleForm->handleRequest($request);
-    //     if($articleForm->isSubmitted() && $articleForm->isValid()){
-    //         // gestion envoi image
-    //         $picture = $articleForm->get('pictureFile')->getData();
-    //         $folder = $this->getParameter('article.folder');
-    //         $ext = $picture->guessExtension();
-    //         $filename = bin2hex(random_bytes(10)) . '.' . $ext;
-    //         $picture->move($folder, $filename);
-    //         $article->setPicture($this->getParameter('article.folder.public_path') . '/articles/' . $filename);
-    //         $article->setCreatedAt(new \DateTimeImmutable());
-    //         $article->setAuthor($user);
-    //         $em->persist($article);
-    //         $em->flush();
-    //         $this->addFlash('success', 'Article ajouté avec succès');
-    //         return $this->redirectToRoute('articles_show');
-    //     }
-    //     return $this->render('article/new.html.twig',[
-    //         'form' => $articleForm->createView(),
-    //         'user' => $user
-    //     ]);
-    // }
-
     // Suppression article
     #[Route('/article/delete/{id}', name: 'article_delete')]
     public function deleteArticle(EntityManagerInterface $em, ?int $id, ArticleRepository $articleRepo)
@@ -181,12 +101,13 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute("administration");
     }
 
-    //Afficher un article précis
+    //Afficher un article précis avec ces commentaires
     #[Route('article/show/{id}', name: 'article_show')]
     public function showArticle(ArticleRepository $articleRepo, ?int $id, ResponseRepository $commentRepo)
     {
         $user = $this->getUser();
         $article = $articleRepo->find($id);
+        //on récupère les commentaires lié à l'article
         $comments = $commentRepo->findBy(['article' => $article]);
         return $this->render('article/show.html.twig',[
             'article' => $article,
@@ -200,6 +121,7 @@ class ArticleController extends AbstractController
     public function showArticlebyCategory(ArticleRepository $articleRepo, ?string $category)
     {
         $user = $this->getUser();
+        // requête permet d'afficher les articles selon la category
         $articles = $articleRepo->getFilterArticles($category);
         return $this->render('article/index.html.twig', [
             'articles' => $articles,

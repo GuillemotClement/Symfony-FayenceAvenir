@@ -4,7 +4,7 @@
   <div class="article-detail">
     <h2>{{ article.title}}</h2>
       <div class="article-picture">
-        <img src="{{ article.picture }}" alt="image article {{article.title}}">
+        <img src="{{ asset(article.picture) }}" alt="image article {{article.title}}">
       </div>
       <div class="article-info">
         <p class="category">{{ article.category | replace({
