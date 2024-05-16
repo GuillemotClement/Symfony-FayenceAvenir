@@ -1,71 +1,115 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="content">
-<div class="presentation">
-<p>FAYENCE-AVENIR est une association loi 1901 dont la volonté est de mobiliser les habitants de notre territoire et favoriser l’expression collective et individuelle.
 
-Notre dessein est d'informer, écouter, rencontrer, permettre à chacun de participer à des débats, des sondages, d’exprimer ses opinions sur des problématiques en lien direct avec son quotidien et sa vision de la vie communale et intercommunale.
-
-Nous croyons fermement que les enjeux de proximité sont d'une importance capitale pour le développement et l'épanouissement de chacun.
-
-En rejoignant FAYENCE AVENIR, vous aurez l'opportunité de contribuer à la mise en place de discussions informatives, de partager vos idées et développer des liens positifs et constructifs .
-
-Ensemble nous pouvons ambitionner une association dynamique et participative .
-
-Plusieurs rubriques vous sont proposées.
-Nous allons les enrichir d’informations auxquelles vous pourrez réagir, partager vos connaissances et exprimer vos souhaits
-
-1. Économie :
-	⁃	Agriculture
-	⁃	Entreprises
-	⁃	Commerce
-	⁃	Le Marché
-	⁃	Le PLU
-
-2. Jeunesse :
-	⁃	Petite enfance
-	⁃	Écoles
-	⁃	Aires de jeux
-	⁃	Piscine
-	⁃	Sport et associations sportives
-
-3. Médico-social :
-	⁃	La Santé
-	⁃	Nos séniors
-	⁃	Le CCAS
-	⁃	France Services
-	⁃
-
-4. Environnement :
-	⁃	Cadre de vie - Urbanisme
-	⁃	Sécurité
-	⁃	Eau
-	⁃	Transition énergétique
-	⁃	Espaces verts/ Végétalisation
-	⁃	Déchets
-	⁃	Transports
-
-5. Tourisme
-	⁃	Offices de tourisme
-	⁃	Hébergements
-	⁃	Restauration
-	⁃	Informations/Communications
-	⁃	Diffusion publicitaire nationale et internationale
-
-6. Culture-Animation
-	⁃	Bibliothèques
-	⁃	Cinémas
-	⁃	Médiathèques
-	⁃	Musées
-	⁃	Manifestations culturelles
-	⁃	Fêtes traditionnelles
-	⁃	Activités ludiques
-	⁃	Salons
-	⁃	Festivals
-
-</p>
+<div class="my-3 d-flex justify-content-between my-5 ">
+  <div class="col-6">
+    <img src="{{asset('build/images/hero.jpg')}}" class="img-fluid rounded"  width="700" height="500" loading="lazy">
+  </div>
+  <div class="d-flex flex-column justify-content-center col-5">
+    <h1 class="">Fayence Avenir</h1>
+    <p class="">Fayence avenir ambitionne à mobiliser les habitants de notre territoire, encourage l'expression collective et individuelle, et favorise les débats sur des enjeux locaux.</p>
+    <p class="">Rejoignez-nous pour partager vos idées et contribuer à construire un avenir meilleur pour notre communauté.</p>
+    <div class="d-flex justify-content-center">
+      <a href="{{ path('register') }}" class="btn btn-primary me-3">Inscription</a>
+      <a href="{{ path('login') }}" class="btn btn-outline-secondary">Connexion</a>
+    </div>
+  </div>
 </div>
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+    <h2 class="text-capitalize text-center">Nos derniers articles</h2>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        
+        {% for article in articles %}
+        <a href="{{ path('article_show', { id: article.id}) }}">
+          <div class="card" >
+            <img src="https://images.unsplash.com/photo-1715586042479-256282ff3cc9?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="image article {{ article.title }}">
+            <div class="card-body">
+              <h3 class="card-title">{{ article.title }}</h3>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </a>
+
+
+
+        
+          <div class="col">
+            <div class="card shadow-sm">
+              <img class="img-fluid" src="" alt="" width="100%" height="225">
+              <svg class="bd-placeholder-img card-img-top"  
+                    xmlns="http://www.w3.org/2000/svg" 
+                    role="img" aria-label="Placeholder: Thumbnail" 
+                    preserveAspectRatio="xMidYMid slice" 
+                    focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" 
+                          height="100%" 
+                          fill="#55595c"/>
+                    <text x="50%" 
+                          y="50%" 
+                          fill="#eceeef" 
+                          dy=".3em">
+                          Thumbnail
+                    </text>
+                </svg>
+              <div class="card-body">
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  </div>
+                  <small class="text-body-secondary">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        
+        <div class="card">
+          <div class="card-picture">
+            <img class="img-fluid" src="{{ article.picture}}" alt="image article {{ article.title }}">
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">{{ article.title }}</h3>
+            <div class="card-info">
+              <p class="small category">{{ article.category | replace({
+                'politic': 'Politique',
+                'nature': 'Nature', 
+                'food': 'Gastonomie', 
+                'sport': 'Sport', 
+                'work': 'Emploi' 
+              })}}</p>
+              <p class="small"><span class="accent">{{article.author.firstname}} {{article.author.lastname}}</span> le {{ article.createdAt | date('d M Y à h:m')}}</p>
+            </div>
+            <div class="separator"></div>
+            <div class="card-text">
+              <p>{{ article.content | slice(0, 100) }}...</p>
+            </div>
+            {# <div class="separator"></div>
+            <div class="article-action">
+              <a class="small" href="">Partager</a>
+              <a class="small" href="">Commenter</a>
+            </div> #}
+          </div>
+        </div>
+        </a>
+      {% endfor %}
+
+        
+      </div>
+    </div>
+  </div>
+
+
+
+
+
   <div class="cards">
     <h2 class="cards-title">Nos dernier articles</h2>
     <div class="card-list">
