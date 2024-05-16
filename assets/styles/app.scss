@@ -1,23 +1,33 @@
-@use "variables";
+//Importation normalize.css -> reset CSS
+@import "~normalize.css/normalize.css";
+// Importation bootstrap
+@import "~bootstrap/scss/bootstrap";
 
-@use "reset";
-@use "base";
-@use "utils";
-@use "debug";
-@use "flex";
 
-@use "components/btn";
-@use "components/card";
 
-@use "layout/header";
-@use "layout/footer";
-@use "layout/articles";
-@use "layout/event";
-@use "layout/element";
 
-@use "test";
 
-@use "pages/administration";
 
-@use "components/input";
-@use "components/form";
+// @use "variables";
+
+// // @use "reset";
+// @use "base";
+// @use "utils";
+// @use "debug";
+// @use "flex";
+
+// // @use "components/btn";
+// @use "components/card";
+
+// @use "layout/header";
+// @use "layout/footer";
+// @use "layout/articles";
+// @use "layout/event";
+// @use "layout/element";
+
+// @use "test";
+
+// @use "pages/administration";
+
+// @use "components/input";
+// @use "components/form";
