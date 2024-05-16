@@ -7,4 +7,21 @@ header {
   a {
     color: white;
   }
+  .hover-zoom {
+    transition: font-size 0.5s;
+    &:hover {
+      font-size: 1.2em;
+      color: var(--primary);
+      font-weight: 700;
+    }
+  }
+  .header-bottom {
+    height: 50px;
+  }
+  .hover-pic {
+    transition: transform 0.4s;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
 }

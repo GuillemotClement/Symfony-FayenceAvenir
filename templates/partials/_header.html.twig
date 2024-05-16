@@ -7,30 +7,28 @@
     
     {# <div class="header-action"> #}
     <div>
-      {# {% if is_granted('IS_AUTHENTICATED_FULLY') %} #}
-        <a href="{{ path('logout')}}" class="btn btn-sm btn-outline-light">deconnexion</a>
-        {# {% if is_granted('ROLE_ADMIN') %} #}
-          <a href="{{ path('administration')}}" class="btn btn-sm btn-outline-light">Administration</a>
-        {# {% endif %} #}
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="{{ path('logout')}}" class="btn btn-sm btn-outline-light me-2">deconnexion</a>
+        {% if is_granted('ROLE_ADMIN') %}
+          <a href="{{ path('administration')}}" class="btn btn-sm btn-outline-light me-2">Administration</a>
+        {% endif %}
         <a href="{{ path('edit_user', {id: app.user.id}) }}" class="">
+        {# Décommenter appel vers la bdd pour ajout image en prod #}
           {# <img class="avatar" src="{{ asset(app.user.picture) }}" alt="profil"> #}
-          <img class="rounded-circle avatar shadow" src="https://randomuser.me/api/portraits/women/66.jpg" alt="profil">
+          <img class="rounded-circle avatar shadow hover-pic" src="https://randomuser.me/api/portraits/women/66.jpg" alt="profil">
         </a>
-      {# {% else %} #}
+      {% else %}
         <a href="{{ path('login')}}" class="btn btn-sm btn-outline-light">Connexion</a>
         <a href="{{ path('register')}}" class="btn btn-sm btn-outline-light">Inscription</a>
-      {# {% endif %} #}
+      {% endif %}
     </div>
   </div>
-  <div class="d-flex justify-content-center align-items-center border bg-white color px-3 py-0">
-    <ul class="d-flex align-items-center m-0 border">
-      <li><a href="{{ path('articles_show')}}" class="txt-black">Articles</a></li>
-      <li><a href="{{ path('event') }}" class="txt-black">Agenda</a></li>
-      <li><a href="{{ path('statut')}}" class="txt-black">l'Assocation</a></li>
-      <li><a href="{{ path('contactForm') }}" class="txt-black">Contact</a></li>
+  <div class="d-flex justify-content-center align-items-center white shadow-sm header-bottom">
+    <ul class="d-flex align-items-center justify-content-around m-0 w-75 p-2">
+      <li><a href="{{ path('articles_show')}}" class="txt-black hover-zoom">Articles</a></li>
+      <li><a href="{{ path('event') }}" class="txt-black hover-zoom">Agenda</a></li>
+      <li><a href="{{ path('statut')}}" class="txt-black hover-zoom">l'Assocation</a></li>
+      <li><a href="{{ path('contactForm') }}" class="txt-black hover-zoom">Contact</a></li>
     </ul>
-    {# <div class="header-social">
-      <a href="" target="_blank" class="txt-black"><i class="fa-brands fa-facebook" ></i></a>
-    </div> #}
   </div>
 </header>
