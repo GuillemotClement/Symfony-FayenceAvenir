@@ -2,6 +2,70 @@
 
 {% block body %}
 <div class="content">
+<div class="presentation">
+<p>FAYENCE-AVENIR est une association loi 1901 dont la volonté est de mobiliser les habitants de notre territoire et favoriser l’expression collective et individuelle.
+
+Notre dessein est d'informer, écouter, rencontrer, permettre à chacun de participer à des débats, des sondages, d’exprimer ses opinions sur des problématiques en lien direct avec son quotidien et sa vision de la vie communale et intercommunale.
+
+Nous croyons fermement que les enjeux de proximité sont d'une importance capitale pour le développement et l'épanouissement de chacun.
+
+En rejoignant FAYENCE AVENIR, vous aurez l'opportunité de contribuer à la mise en place de discussions informatives, de partager vos idées et développer des liens positifs et constructifs .
+
+Ensemble nous pouvons ambitionner une association dynamique et participative .
+
+Plusieurs rubriques vous sont proposées.
+Nous allons les enrichir d’informations auxquelles vous pourrez réagir, partager vos connaissances et exprimer vos souhaits
+
+1. Économie :
+	⁃	Agriculture
+	⁃	Entreprises
+	⁃	Commerce
+	⁃	Le Marché
+	⁃	Le PLU
+
+2. Jeunesse :
+	⁃	Petite enfance
+	⁃	Écoles
+	⁃	Aires de jeux
+	⁃	Piscine
+	⁃	Sport et associations sportives
+
+3. Médico-social :
+	⁃	La Santé
+	⁃	Nos séniors
+	⁃	Le CCAS
+	⁃	France Services
+	⁃
+
+4. Environnement :
+	⁃	Cadre de vie - Urbanisme
+	⁃	Sécurité
+	⁃	Eau
+	⁃	Transition énergétique
+	⁃	Espaces verts/ Végétalisation
+	⁃	Déchets
+	⁃	Transports
+
+5. Tourisme
+	⁃	Offices de tourisme
+	⁃	Hébergements
+	⁃	Restauration
+	⁃	Informations/Communications
+	⁃	Diffusion publicitaire nationale et internationale
+
+6. Culture-Animation
+	⁃	Bibliothèques
+	⁃	Cinémas
+	⁃	Médiathèques
+	⁃	Musées
+	⁃	Manifestations culturelles
+	⁃	Fêtes traditionnelles
+	⁃	Activités ludiques
+	⁃	Salons
+	⁃	Festivals
+
+</p>
+</div>
   <div class="cards">
     <h2 class="cards-title">Nos dernier articles</h2>
     <div class="card-list">
@@ -9,7 +73,7 @@
         <a href="{{ path('article_show', { id: article.id}) }}">
         <div class="card">
           <div class="card-picture">
-            <img src="{{ article.picture}}" alt="image article {{ article.title }}">
+            <img class="img-fluid" src="{{ article.picture}}" alt="image article {{ article.title }}">
           </div>
           <div class="card-content">
             <h3 class="card-title">{{ article.title }}</h3>
@@ -45,7 +109,7 @@
           <a href="{{ path('show_event', { id: event.id})}}">
           <div class="card">
             <div class="card-picture">
-              <img src="{{ event.picture}}" alt="">
+              <img class="img-fluid" src="{{ event.picture}}" alt="">
             </div>
             <div class="card-content">
               <h3 class="card-title">{{ event.name }}</h3>

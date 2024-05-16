@@ -3,12 +3,16 @@
 // Importation bootstrap
 @import "~bootstrap/scss/bootstrap";
 
+// Style perso
+@import "variables";
+@import "base";
+@import "reset";
 
+// LAYOUT
+@import "layout/header";
 
-
-
-
-// @use "variables";
+//COMPONENT
+@import "components/btn";
 
 // // @use "reset";
 // @use "base";

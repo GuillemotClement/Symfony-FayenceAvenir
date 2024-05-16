@@ -17,8 +17,9 @@
 		{% endblock %}
 	</head>
 	<body>
+	<div class="container-fluid px-0">
 		{{ include("partials/_header.html.twig") }}
-		<div class="app-content">
+		<div class="container">
 			{% block body %}{% endblock %}
 		</div>
 		{% for cat, list in app.flashes %}
@@ -27,5 +28,6 @@
 				{% endfor %}
 		{% endfor %}
 		{{ include("partials/_footer.html.twig") }}
+	</div>
 </body>
 </html>

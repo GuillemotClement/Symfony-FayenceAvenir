@@ -1,0 +1,16 @@
+a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+body {
+  color: var(--text);
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  li {
+    margin: 0;
+  }
+}
