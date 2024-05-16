@@ -1,10 +1,8 @@
-<header class="mx-0">
-  <div class="d-flex justify-content-between p-3 align-items-center mx-0">
-    
+<header class="">
+  <div class="d-flex justify-content-between p-3 align-items-center">
     <a href="{{ path('home') }}">
       <img class="logo" src="{{ asset('build/images/logo.png')}}" alt="logo">
     </a>
-    
     {# <div class="header-action"> #}
     <div>
       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -27,8 +25,8 @@
     <ul class="d-flex align-items-center justify-content-around m-0 w-75 p-2">
       <li><a href="{{ path('articles_show')}}" class="txt-black hover-zoom">Articles</a></li>
       <li><a href="{{ path('event') }}" class="txt-black hover-zoom">Agenda</a></li>
-      <li><a href="{{ path('statut')}}" class="txt-black hover-zoom">l'Assocation</a></li>
-      <li><a href="{{ path('contactForm') }}" class="txt-black hover-zoom">Contact</a></li>
+      <li><a href="{{ path('statut')}}" class="txt-black hover-zoom">l'Association</a></li>
+      <li><a href="{{ path('contactForm') }}" class="txt-black hover-zoom">Nous contacter</a></li>
     </ul>
   </div>
 </header>
