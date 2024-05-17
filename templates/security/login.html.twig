@@ -3,9 +3,58 @@
 {% block title %}Connection{% endblock %}
 
 {% block body %}
-<div class="content">
-    <div class="form-container">
-        <form action="{{ path('login' ) }}" method="post">
+
+
+
+
+<div class="container d-flex justify-content-center">
+  <form action="{{ path('login' ) }}" method="post" class="w-50 my-5 p-3 rounded shadow white">
+    <h1 class="text-center">Connexion</h1>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="_username">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Mot de passe</label>
+      <input type="password" class="form-control" id="password" name="_password">
+    </div>
+    <div class="mb-3 form-check d-flex justify-content-center">
+      <input type="checkbox" class="form-check-input me-3" id="remember_me" name="_remember_me">
+      <label class="form-check-label" for="remember_me">Se souvenir de moi</label>
+    </div>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+      {% if error %}
+          <ul class="form-error">
+              <li>{{ error.messageKey | trans(error.messageData, 'security') }}</li>
+          </ul>
+      {% endif %}
+      <button type="submit" class="btn btn-primary">Connexion</button>
+    <hr>
+    <div class="helper d-flex justify-content-between">
+          
+            <a href="{{ path('register') }}" class="small">Vous n'avez pas de compte</a>
+        
+            <a href="" class="small">Mot de passe oublié</a>
+        
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+        {# <form >
         <h1>Connexion</h1>
             <div class="form-row">
                 <label for="email">Email</label>
@@ -13,38 +62,25 @@
             </div>
             <div class="form-row">
                 <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="_password">
+                <input type="password" id="password" >
             </div>
             <div class="form-row">
                 <label for="remember_me">
-                    <input type="checkbox" id="remember_me" name="_remember_me">
+                    <input type="checkbox" id="" >
                     Se souvenir de moi
                 </label>
             </div>
 
             {# Token secu #}
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-            {% if error %}
-                <ul class="form-error">
-                    <li>{{ error.messageKey | trans(error.messageData, 'security') }}</li>
-                </ul>
-            {% endif %}
             
             
-            <div class="helper flex justify-between">
-                <div class="">
-                    <a href="{{ path('register') }}" class="small">Vous n'avez pas de compte</a>
-                </div>
-                <div class="">
-                    <a href="" class="small">Mot de passe oublié</a>
-                </div>
-            </div>
-            <div class="separator mb-20"></div>
+            
+            
+            {# <div class="separator mb-20"></div>
             <div class="action p20">
-                <button class="btn btn-primary">Connection</button>
+                <button class="btn btn-primary"></button>
             </div>
         </form>
     </div>
-</div>
+</div> #}
 {% endblock %}

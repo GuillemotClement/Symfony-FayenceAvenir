@@ -6,10 +6,12 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Service\Uploader;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
@@ -22,7 +24,7 @@ class SecurityController extends AbstractController
     }
     // fonction inscription d'un nouvel utilisateur
     #[Route('/register', name: 'register')]
-    public function register(Uploader $uploader, UserAuthenticatorInterface $userAuthicator, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher)
+    public function register(Uploader $uploader, UserAuthenticatorInterface $userAuthicator, Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher, MailerInterface $mailer)
     {
         $user = new User();
         $userForm = $this->createForm(UserType::class, $user);
@@ -50,7 +52,18 @@ class SecurityController extends AbstractController
             $user->setRoles(['ROLE_USER']);
             $em->persist($user);
             $em->flush();
-            // $this->addFlash('success', 'Inscription réussie');
+            // $this->addFlash('success', 'Bienvenue sur FayenceAvenir');
+
+            // envoi du mail de bienvenue
+            $email = new TemplatedEmail();
+            $email->to($user->getEmail())
+                ->subject('Bienvenue sur Fayence-Avenir')
+                ->htmlTemplate('@email_templates/welcome.html.twig')
+                ->context([
+                  'username' => $user->getFirstname()
+                ]);
+            $mailer->send($email);
+
             return $userAuthicator->authenticateUser($user, $this->authenticator, $request);
         }
         return $this->render('security/register.html.twig', [
