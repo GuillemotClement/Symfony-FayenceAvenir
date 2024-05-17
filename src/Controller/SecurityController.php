@@ -2,20 +2,27 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Service\Uploader;
+use App\Entity\ResetPassword;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ResetPasswordRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+// use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class SecurityController extends AbstractController
 {
@@ -92,4 +99,57 @@ class SecurityController extends AbstractController
     public function logout()
     {}
 
+    #[Route('/reset-password/{token}', name: 'reset-password')]
+    public function resetPassword()
+    {
+        return $this->json('');
+    }
+
+    #[Route('/reset-password', name: 'reset_password_request')]
+    public function resetPasswordRequest(MailerInterface $mailer,Request $request, UserRepository $userRepository, ResetPasswordRepository $resetPasswordRepository, EntityManagerInterface $em)
+    {
+        $emailForm = $this->createFormBuilder()->add('email', EmailType::class, [
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Veuillez renseigner votre adresse email',
+                ])
+            ]
+        ])->getForm();
+
+        $emailForm->handleRequest($request);
+
+        if($emailForm->isSubmitted() && $emailForm->isValid()){
+            $emailValue = $emailForm->get('email')->getData();
+            $user = $userRepository->findOneBy(['email' => $emailValue]);
+            // dd($user);
+            if($user){
+                $oldResetPassword = $resetPasswordRepository->findOneBy(['user' => $user]);
+                if($oldResetPassword){
+                    $em->remove($oldResetPassword);
+                    $em->flush();
+                }
+                $resetPassword = new ResetPassword();
+                $resetPassword->setUser($user);
+                $resetPassword->setExpiredAt(new \DateTimeImmutable('+2 hours'));
+                $token = substr(str_replace(['=', '+', '/'], '', base64_encode(random_bytes(32))), 0, 20);
+                $resetPassword->setToken($token);
+                $em->persist($resetPassword);
+                $em->flush();
+                $email = new TemplatedEmail();
+                $email->to($emailValue)
+                    ->subject('Reinitialisation du mot de passe')
+                    ->htmlTemplate('@email_templates/reset_password_request.html.twig')
+                    ->context([
+                        'token' => $token
+                    ]);
+                $mailer->send($email);
+            }
+            $this->addFlash('success', 'Un email pour remplacer le mot de passe a été envoyé');
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('security/reset_password.html.twig', [
+            'form' => $emailForm->createView()
+        ]);
+    }
 }
