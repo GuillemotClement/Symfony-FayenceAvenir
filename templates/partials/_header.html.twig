@@ -1,4 +1,4 @@
-<header class="">
+<header class="mb-4">
   <div class="d-flex justify-content-between p-3 align-items-center">
     <a href="{{ path('home') }}">
       <img class="logo" src="{{ asset('build/images/logo.png')}}" alt="logo">
@@ -6,10 +6,11 @@
     {# <div class="header-action"> #}
     <div>
       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="{{ path('logout')}}" class="btn btn-sm btn-outline-light me-2">deconnexion</a>
         {% if is_granted('ROLE_ADMIN') %}
           <a href="{{ path('administration')}}" class="btn btn-sm btn-outline-light me-2">Administration</a>
         {% endif %}
+        <a href="{{ path('logout')}}" class="btn btn-sm btn-outline-light me-2">deconnexion</a>
+        
         <a href="{{ path('edit_user', {id: app.user.id}) }}" class="">
         {# Décommenter appel vers la bdd pour ajout image en prod #}
           {# <img class="avatar" src="{{ asset(app.user.picture) }}" alt="profil"> #}

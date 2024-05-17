@@ -3,7 +3,9 @@ const Encore = require("@symfony/webpack-encore");
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
-  Encore.configureRuntimeEnvironment(process.env.NODE_ENV || "dev");
+  Encore.configureRuntimeEnvironment(
+    process.env.NODE_ENV || "dev"
+  );
 }
 
 Encore
@@ -26,6 +28,11 @@ Encore
     from: "./assets/images",
     pattern: /\.(png|jpg|jpeg|svg|gif)$/,
     to: "images/[path][name].[ext]",
+  })
+
+  .copyFiles({
+    from: "./assets/pdf",
+    to: "pdf/[path][name].[ext]",
   })
 
   // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

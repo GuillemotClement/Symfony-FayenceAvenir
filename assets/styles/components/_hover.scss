@@ -1,0 +1,14 @@
+.filter {
+  li {
+    &:hover {
+      border: 2px solid var(--primary);
+    }
+    i:hover {
+      color: var(--primary);
+    }
+    a:hover {
+      color: var(--primary);
+      font-weight: 600;
+    }
+  }
+}
