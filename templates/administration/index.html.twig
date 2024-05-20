@@ -1,9 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="content">
-	<div class="administration flex ">
-			<div class="sidebar py20">
+<h1 class="text-center capitalize">Panneau administration</h1>
+	<div class="administration-edit">
+	<h2 class="center">Article</h2>
+	<div class="administration-list d-flex column">
+		{% for article in articles %}
+			<div class="administration-element mb20 flex align-center justify-between p20">
+				<div class="administration-element-content">
+					<p class="mr20 element-text">{{ article.title | slice(0, 60)}}...</p>
+					<p class="small">Ecrit le {{article.createdAt | date('d M Y')}} par <span class="author">{{ article.author.firstname }} {{ article.author.lastname }}</span></p>
+				</div>
+				<div class="administration-element-action  ">
+					<a class="btn btn-small btn-warning mr5" href="{{ path('article_edit', {id: article.id})}}">Editer</a>
+					<a class="btn btn-small btn-danger" href="{{ path('article_delete', {id: article.id})}}">Supprimer</a>
+				</div>
+			</div>
+{% endfor %}
+
+
+
+
+
+{# <div class="content">
+	<div class="administration flex "> #}
+			{# <div class="sidebar py20">
 				<ul class="flex column align-center">
 					<li class="mb20">
 						<h3>Articles</h3>
@@ -18,9 +39,10 @@
 						<a class="small" href="{{ path('show_user')}}">Modifier utilisateurs</a>
 					</li>
 				</ul>
-			</div>
+			</div> #}
+			{# <div class="container">
 			<div class="administration-main fill p20">
-			<h1 class="administration-title center capitalize">Panneau administration</h1>
+			
 				<div class="administration-edit">
 					<h2 class="center">Article</h2>
 					<div class="administration-list">
@@ -57,6 +79,8 @@
 					</div>
 				</div>
 			</div>
+			</div>
+			
 	</div>
-</div>
+</div> #}
 {% endblock %}

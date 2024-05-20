@@ -1,4 +1,5 @@
 import "./styles/app.scss";
+// import "./scripts/header";
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -17,3 +18,8 @@ import "./styles/app.scss";
 // $(document).ready(function () {
 //   $('[data-toggle="popover"]').popover();
 // });
+const $ = require("jquery");
+require("bootstrap");
+$(document).ready(function () {
+  $('[data-toggle="popover"]').popover();
+});

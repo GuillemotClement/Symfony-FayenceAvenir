@@ -1,11 +1,28 @@
-<header class="mb-4">
-  <div class="d-flex justify-content-between p-3 align-items-center">
-    <a href="{{ path('home') }}">
+<header class="navbar navbar-expand-lg ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ path('home') }}">
       <img class="logo" src="{{ asset('build/images/logo.png')}}" alt="logo">
     </a>
-    {# <div class="header-action"> #}
-    <div>
-      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <button class="navbar-toggler btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon txt-white"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a href="{{ path('articles_show')}}" class="nav-link txt-white">Articles</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ path('event') }}" class="nav-link txt-white">Agenda</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ path('statut')}}" class="nav-link txt-white">l'Association</a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ path('contactForm') }}" class="nav-link txt-white">Nous contacter</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center justify-content-center">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         {% if is_granted('ROLE_ADMIN') %}
           <a href="{{ path('administration')}}" class="btn btn-sm btn-outline-light me-2">Administration</a>
         {% endif %}
@@ -13,8 +30,38 @@
         
         <a href="{{ path('edit_user', {id: app.user.id}) }}" class="">
         {# Décommenter appel vers la bdd pour ajout image en prod #}
-          {# <img class="avatar" src="{{ asset(app.user.picture) }}" alt="profil"> #}
+          {# {# <img class="avatar" src="{{ asset(app.user.picture) }}" alt="profil">  #}
           <img class="rounded-circle avatar shadow hover-pic" src="https://randomuser.me/api/portraits/women/66.jpg" alt="profil">
+        </a>
+      {% else %}
+        <a href="{{ path('login')}}" class="btn btn-sm btn-outline-light">Connexion</a>
+        <a href="{{ path('register')}}" class="btn btn-sm btn-outline-light">Inscription</a>
+      {% endif %}
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+
+{# <header class="mb-4">
+  <div class="d-flex justify-content-between p-3 align-items-center">
+    <a href="{{ path('home') }}">
+      <img class="logo" src="{{ asset('build/images/logo.png')}}" alt="logo">
+    </a>
+    <div class="header-action">
+    <div>
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if is_granted('ROLE_ADMIN') %}
+          <a href="{{ path('administration')}}" class="btn btn-sm btn-outline-light me-2">Administration</a>
+        {% endif %}
+        <a href="{{ path('logout')}}" class="btn btn-sm btn-outline-light me-2">deconnexion</a>
+        
+        <a href="{{ path('edit_user', {id: app.user.id}) }}" class=""> #}
+        {# Décommenter appel vers la bdd pour ajout image en prod #}
+          {# {# <img class="avatar" src="{{ asset(app.user.picture) }}" alt="profil">  #}
+          {# <img class="rounded-circle avatar shadow hover-pic" src="https://randomuser.me/api/portraits/women/66.jpg" alt="profil">
         </a>
       {% else %}
         <a href="{{ path('login')}}" class="btn btn-sm btn-outline-light">Connexion</a>
@@ -28,6 +75,58 @@
       <li><a href="{{ path('event') }}" class="txt-black hover-zoom">Agenda</a></li>
       <li><a href="{{ path('statut')}}" class="txt-black hover-zoom">l'Association</a></li>
       <li><a href="{{ path('contactForm') }}" class="txt-black hover-zoom">Nous contacter</a></li>
-    </ul>
+    </ul> #}
+    {# <div class="menu-xs" id="#burger">
+      <i class="fa-solid fa-bars"></i>
+    </div> #}
+  {# </div>
+</header>  #}
+{# <div class="menu-xs">
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if is_granted('ROLE_ADMIN') %}
+      <a href="{{ path('administration')}}" class="btn btn-sm btn-outline-light me-2">Administration</a>
+    {% endif %}
+    <a href="" class="text-uppercase">Profil</a>
+    <a href="{{ path('logout')}}" class="btn btn-sm btn-outline-light me-2">deconnexion</a>
+    {% else %}
+    <a href="{{ path('login')}}" class="btn btn-sm btn-outline-light">Connexion</a>
+    <a href="{{ path('register')}}" class="btn btn-sm btn-outline-light">Inscription</a>
+  {% endif %}
+</div> #}
+
+
+
+{# <header class="navbar navbar-expand-lg">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <div class="header-top d-flex justify-content-between align-items-center">
+      <a class="navbar-brand" href="{{ path('home') }}">
+        <img class="logo" src="{{ asset('build/images/logo.png')}}" alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
-</header>
+</header> #}
