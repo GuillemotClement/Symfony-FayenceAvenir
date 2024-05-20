@@ -2,21 +2,17 @@
 
 {% block body %}
   {% if not app.user %}
-  <div class="container col-xxl-8 px-4 py-5">
-      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-        <div class="col-10 col-sm-8 col-lg-6">
-          <img src="{{asset('build/images/hero.jpg')}}" class="d-block mx-lg-auto img-fluid rounded shadow" alt="Bootstrap Themes" width="800" height="600" loading="lazy">
-        </div>
-        <div class="col-lg-6">
-          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Fayence Avenir</h1>
-          <p class="lead">Fayence Avenir ambitionne à mobiliser les habitants de notre territoire, encourage l'expression collective et individuelle, et favorise les débats sur des enjeux locaux.</p>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="{{ path('register') }}" class="btn btn-primary btn-lg px-4 me-md-2">Inscription</a>
-            <a href="{{ path('login') }}" class="btn btn-outline-secondary btn-lg px-4">Connexion</a>
-          </div>
+  {# <div class=""> #}
+    <div class="px-4 py-5 my-5 text-center">
+      <h1 class="display-5 fw-bold text-body-emphasis">Fayence Avenir</h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">Fayence Avenir ambitionne à mobiliser les habitants de notre territoire, encourage l'expression collective et individuelle, et favorise les débats sur des enjeux locaux.</p>
+        <div class="">
+          <a href="{{ path('register') }}" class="btn btn-primary btn-lg px-4 me-md-2 mb-3">Inscription</a> 
+          <a href="{{ path('login') }}" class="btn btn-outline-secondary btn-lg px-4 mb-3">Connexion</a>
         </div>
       </div>
-    </div>
+    </div> 
   {% endif %}
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
