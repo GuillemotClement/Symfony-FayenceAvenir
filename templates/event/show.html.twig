@@ -1,33 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="element-detail white shadow rounded m-5">
-    <div class="element-picture">
-      <img src="{{ asset(event.picture) }}" alt="image event {{event.name}}" class="img-fluid">
+  <div class="p-4 my-4 white shadow rounded">
+    <div class="d-flex justify-content-center mb-4">
+      <img src="{{ asset(event.picture) }}" alt="image event {{event.name}}" class="img-fluid rounded shadow">
     </div>
-    <h1 class="text-center text-capitalize">{{ event.name }}</h1>
+    <h1 class="text-center mb-4 text-capitalize">{{ event.name }}</h1>
     <div class="px-3">
       <div class="element-info">
-      <p class="element-date"><span class="bold">Date de l'évènement</span> : {{ event.date | date('d M Y à h:m')}}</p>
-      <p class="element-adress"><span class="bold">Adresse de l'évènement</span> : {{ event.adresse}}</p>
+      <p class="element-date"><span class="fw-bold">Date de l'évènement</span> : {{ event.date | date('d M Y à h:m')}}</p>
+      <p class="element-adress"><span class="fw-bold">Adresse de l'évènement</span> : {{ event.adresse}}</p>
     </div>
-    <hr>
+    <hr class="mb-1">
     <div class="element-content py-3">
-      <pre>{{event.content | nl2br }}</pre>
+      <p class="text-break">{{event.content | nl2br }}</p>
     </div>
     </div>
     
   </div>
-
-
-
-
-
-
-
-
-<div class="content">
-  
-</div>
 {% endblock %}
 

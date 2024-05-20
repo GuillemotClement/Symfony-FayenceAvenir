@@ -1,50 +1,43 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-<div class="content">
-  <div class="article-detail">
-    <h2>{{ article.title}}</h2>
-      <div class="article-picture">
-        <img src="{{ asset(article.picture) }}" alt="image article {{article.title}}">
-      </div>
-      <div class="article-info">
-        <p class="category">{{ article.category | replace({
-          'culture': 'Culture/Animation',
-          'societal': 'Sociétal', 
-          'environment': 'Environnement', 
-          'sport': 'Sport', 
-          'energy': 'Energie', 
-          'agriculture': 'Agriculture', 
-          'tourism': 'Tourisme', 
-        }) }}</p>
-        <p class="article-date small">Ecrit le {{ article.createdAt | date('d M Y à h:m')}} par <span class="author">{{article.author.firstname}} {{article.author.firstname}}</span></p>
-      </div>
-      <div class="separator"></div>
-      <pre class="article-text">{{ article.content | nl2br }}</pre>
-      <div class="separator"></div>
-      <div class="article-action">
-      {% if is_granted('ROLE_USER') %}
-        <a href="{{ path('add_response', {id: article.id})}}" class="btn btn-action">Commenter</a>
-        <a href="" class="btn btn-action">Partager</a>
-      {% else %}
-        <p>Pour ajouter un commentaire, veuillez vous <span class="accent"><a href="{{ path('login')}}">connecter</a></span></p>
-      {% endif %}
-      </div>
-      <div class="separator"></div>
-      <div class="article-comments">
-        <h3>Espace commentaires</h3>
-        <div class="comments">
-          <p class="small rules">Nous encourageons les commentaires respectueux et constructifs sur notre site web. Cependant, nous nous réservons le droit de supprimer tout commentaire inapproprié, offensant, diffamatoire, haineux, menaçant, spam ou tout autre commentaire qui ne respecte pas les règles de notre communauté.</p>
-          {% for comment in comments %}
-            <div class="comment">
-              <div class="comment-info">
-                <p class="">Commentaire de <span class="author">{{comment.author.firstname}} {{comment.author.lastname}}</span></p>
-                <p class="small">Posté le {{ comment.createdAt | date('d M Y à h:m')}}</p>
-              </div>
-              <pre class="comment-content">{{ comment.content }}</pre>
+
+  <div class="article-detail p-4 my-4 white shadow rounded">
+    <div class="article-picture d-flex justify-content-center mb-5">
+      <img class="img-fluid rounded shadow" src="https://images.unsplash.com/photo-1716033754000-fbf7dfefabda?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8" alt="image article {{article.title}}">
+    {# décommenter en prod #}
+      {# <img src="{{ asset(article.picture) }}" alt="image article {{article.title}}"> #}
+    </div>
+    <h1 class="text-center mb-4">{{ article.title}}</h1>
+    <div class="article-info">
+      <p class="article-date small">Ecrit le <span class="fst-italic">{{ article.createdAt | date('d M Y à h:m')}}</span> par <span class="author">{{article.author.firstname}} {{article.author.firstname}}</span></p>
+    </div>
+    <hr>
+    <p class="article-text mb-5">{{ article.content | nl2br }}</p>
+    <hr>
+    <div class="article-action text-center mb-5">
+    {% if is_granted('ROLE_USER') %}
+      <a href="{{ path('add_response', {id: article.id})}}" class="btn btn-primary btn-lg px-4 me-md-2">Commenter</a>
+      <a href="" class="btn btn-action">Partager</a>
+    {% else %}
+      <p class="fw-bold">Pour ajouter un commentaire, veuillez vous <span class="accent"><a href="{{ path('login')}}">connecter</a></span></p>
+    {% endif %}
+    </div>
+    <div class="article-comments comments p-4">
+      <h3 class="text-center mb-3">Espace commentaires</h3>
+      <div class="">
+        <p class="fst-italic text-justify">Nous encourageons les commentaires respectueux et constructifs sur notre site web. Cependant, nous nous réservons le droit de supprimer tout commentaire inapproprié, offensant, diffamatoire, haineux, menaçant, spam ou tout autre commentaire qui ne respecte pas les règles de notre communauté.</p>
+        {% for comment in comments %}
+          <div class="comment rounded mb-3 p-3">
+            <div class="comment-info d-flex justify-content-between align-items-center">
+              <p class="">Commentaire de <span class="author">{{comment.author.firstname}} {{comment.author.lastname}}</span></p>
+              <p class="small">Posté le {{ comment.createdAt | date('d M Y à h:m')}}</p>
             </div>
-          {% endfor %}
-        </div>
+            <hr class="m-0 mb-2">
+            <p class="comment-content">{{ comment.content }}</p>
+          </div>
+        {% endfor %}
       </div>
+    </div>
   </div>
-</div>
+
 {% endblock %}
