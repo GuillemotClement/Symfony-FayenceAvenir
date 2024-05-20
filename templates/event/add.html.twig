@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-  <div class="content">
-    <div class="form-container">
-      <h1>Nouvel evenement</h1>
+<div class="d-flex justify-content-center align-items-center p-5">
+      
         {{ form_start(form) }}
+        <h1 class="text-center mb-3">Ajouter évènement</h1>
           <div class="form-row">
             {{ form_label(form.name) }}
             {{ form_widget(form.name) }}
@@ -29,7 +29,7 @@
             {{ form_widget(form.pictureFile) }}
             {{ form_errors(form.pictureFile) }}
           </div>
-          <div class="form-action">
+          <div class="form-action py-3 d-flex justify-content-between">
             <button class="btn btn-primary">Valider</button>
             <a class="btn btn-warning" href="{{ path('home')}}">Annuler</a>
           </div>
@@ -39,4 +39,35 @@
   </div>
 {% endblock %}
 
-
+{# 
+<div class="d-flex justify-content-center align-items-center p-5">
+  {{ form_start(form) }}
+    <h1 class="text-center mb-3">Nouvel article</h1>
+    <div class="form-row">
+    <div class="">
+      {{ form_label(form.title) }}
+      {{ form_widget(form.title) }}
+      {{ form_errors(form.title) }}
+    </div>
+    </div>
+    <div class="form-row">
+      {{ form_label(form.category) }}
+      {{ form_widget(form.category) }}
+      {{ form_errors(form.category) }}
+    </div>
+    <div class="form-row">
+      {{ form_label(form.content) }}
+      {{ form_widget(form.content) }}
+      {{ form_errors(form.content) }}
+    </div>
+    <div class="form-row">
+      {{ form_label(form.pictureFile) }}
+      {{ form_widget(form.pictureFile) }}
+      {{ form_errors(form.pictureFile) }}
+    </div>
+    <div class="form-action d-flex justify-content-between my-3">
+      <button class="btn btn-primary">Valider</button>
+      <a class="btn btn-warning" href="{{ path('home')}}">Annuler</a>
+    </div>
+  {{ form_end(form) }}
+</div> #}

@@ -1,19 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="content">
-  <div class="form-container form-role">
-    <h1>Modifier le rôle</h1>
+<div class="d-flex justify-content-center align-items-center p-5">
+  
+    
       {{ form_start(form) }}
+      <h1>Modifier le rôle</h1>
         <div class="form-row checkbox">
           {{ form_label(form.roles) }}
           {{ form_widget(form.roles) }}
           {{ form_errors(form.roles) }}
         </div>
-        <div class="action">
+        <div class="d-flex justify-content-between py-3">
           <button class="btn btn-primary">Valider</button>
+          <a class="btn btn-warning" href="{{ path('home')}}">Annuler</a>
         </div>
       {{ form_end(form) }}
-  </div>
+
 </div>
 {% endblock %}
