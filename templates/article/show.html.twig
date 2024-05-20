@@ -13,15 +13,14 @@
     </div>
     <hr>
     <p class="article-text mb-5">{{ article.content | nl2br }}</p>
-    <hr>
-    <div class="article-action text-center mb-5">
+    {# <div class="article-action text-center mb-5">
     {% if is_granted('ROLE_USER') %}
       <a href="{{ path('add_response', {id: article.id})}}" class="btn btn-primary btn-lg px-4 me-md-2">Commenter</a>
-      <a href="" class="btn btn-action">Partager</a>
-    {% else %}
+      {# <a href="" class="btn btn-action">Partager</a> #}
+    {# {% else %}
       <p class="fw-bold">Pour ajouter un commentaire, veuillez vous <span class="accent"><a href="{{ path('login')}}">connecter</a></span></p>
     {% endif %}
-    </div>
+    </div> #} 
     <div class="article-comments comments p-4">
       <h3 class="text-center mb-3">Espace commentaires</h3>
       <div class="">
@@ -36,6 +35,12 @@
             <p class="comment-content">{{ comment.content }}</p>
           </div>
         {% endfor %}
+        {% if is_granted('ROLE_USER') %}
+          <a href="{{ path('add_response', {id: article.id})}}" class="btn btn-primary btn-lg px-4 me-md-2">Commenter</a>
+          {# <a href="" class="btn btn-action">Partager</a> #}
+        {% else %}
+          <p class="fw-bold">Pour ajouter un commentaire, veuillez vous <span class="accent"><a href="{{ path('login')}}">connecter</a></span></p>
+        {% endif %}
       </div>
     </div>
   </div>

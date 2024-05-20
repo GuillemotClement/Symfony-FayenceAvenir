@@ -3,11 +3,41 @@
 {% block title %}Connection{% endblock %}
 
 {% block body %}
+<div class="container d-flex justify-content-center align-items-center p-5">
+  <form action="{{ path('login' ) }}" method="post">
+  <h1 class="text-center mb-3">Connexion</h1>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" name="_username">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Mot de passe</label>
+    <input type="password" class="form-control" id="password" name="_password">
+  </div>
+  <div class="mb-3 form-check d-flex ">
+    <input type="checkbox" class="form-check-input me-3" id="remember_me" name="_remember_me">
+    <label class="form-check-label" for="remember_me">Se souvenir de moi</label>
+  </div>
+  <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+  {% if error %}
+      <ul class="form-error">
+          <li>{{ error.messageKey | trans(error.messageData, 'security') }}</li>
+      </ul>
+  {% endif %}
+  <div class="d-flex flex-column my-4">
+    <button type="submit" class="btn btn-primary mb-4">Connexion</button>
+    <a class="btn btn-warning" href="{{ path('home')}}">Annuler</a>
+  </div>
+  <hr>
+  <div class="helper d-flex flex-column">
+    <a href="{{ path('register') }}" class="small">Vous n'avez pas de compte</a>
+    <a href="{{ path('reset_password_request')}}" class="small">Mot de passe oublié</a>
+  </div>
+</form>
+</div>
 
-
-
-
-<div class="container d-flex justify-content-center">
+{% endblock %}
+{# <div class="container d-flex justify-content-center align-items-center">
   <form action="{{ path('login' ) }}" method="post" class="w-50 my-5 p-3 rounded shadow white">
     <h1 class="text-center">Connexion</h1>
     <div class="mb-3">
@@ -38,49 +68,4 @@
         
     </div>
   </form>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-        {# <form >
-        <h1>Connexion</h1>
-            <div class="form-row">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="_username" value="">
-            </div>
-            <div class="form-row">
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" >
-            </div>
-            <div class="form-row">
-                <label for="remember_me">
-                    <input type="checkbox" id="" >
-                    Se souvenir de moi
-                </label>
-            </div>
-
-            {# Token secu #}
-            
-            
-            
-            
-            {# <div class="separator mb-20"></div>
-            <div class="action p20">
-                <button class="btn btn-primary"></button>
-            </div>
-        </form>
-    </div>
 </div> #}
-{% endblock %}

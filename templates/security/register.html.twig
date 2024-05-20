@@ -1,45 +1,42 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
- <div class="content">
-  <div class="form-container">
-    <h1>Formulaire inscription</h1>
-      {{ form_start(form) }}
-      <div class="form-row">
-        {{ form_label(form.email) }}
-        {{ form_widget(form.email) }}
-        {{ form_errors(form.email) }}
-      </div>
-      <div class="form-row">
-        {{ form_label(form.password) }}
-        {{ form_widget(form.password) }}
-        {{ form_errors(form.password) }}
-      </div>
-      <div class="form-row">
-        {{ form_label(form.firstname) }}
-        {{ form_widget(form.firstname) }}
-        {{ form_errors(form.firstname) }}
-      </div>
-      <div class="form-row">
-        {{ form_label(form.lastname) }}
-        {{ form_widget(form.lastname) }}
-        {{ form_errors(form.lastname) }}
-      </div>
-      <div class="form-row">
-        {{ form_label(form.pictureFile) }}
-        {{ form_widget(form.pictureFile) }}
-        {{ form_errors(form.pictureFile) }}
-      </div>
-      
-      <div class="form-helper">
-        <a href="{{ path('login') }}" class="small">Vous avez déjà un compte ?</a>
-      </div>
-      <div class="separator mb20"></div>
-      <div class="form-action">
-        <button class="btn btn-primary mr-10">Inscription</button>
-        <a class="btn btn-warning" href="{{ path('home')}}">Annuler</a>
-      </div>
-      {{ form_end(form )}}
-    </div>
+ <div class="container d-flex justify-content-center align-items-center p-5">
+  {{ form_start(form) }}
+  <h1 class="text-center mb-3">Inscription</h1>
+  <div class="form-row">
+    {{ form_label(form.email) }}
+    {{ form_widget(form.email) }}
+    {{ form_errors(form.email) }}
+  </div>
+  <div class="form-row">
+    {{ form_label(form.password) }}
+    {{ form_widget(form.password) }}
+    {{ form_errors(form.password) }}
+  </div>
+  <div class="form-row">
+    {{ form_label(form.firstname) }}
+    {{ form_widget(form.firstname) }}
+    {{ form_errors(form.firstname) }}
+  </div>
+  <div class="form-row">
+    {{ form_label(form.lastname) }}
+    {{ form_widget(form.lastname) }}
+    {{ form_errors(form.lastname) }}
+  </div>
+  <div class="form-row">
+    {{ form_label(form.pictureFile) }}
+    {{ form_widget(form.pictureFile) }}
+    {{ form_errors(form.pictureFile) }}
+  </div>
+  <div class="my-3">
+    <a href="{{ path('login') }}" class="fst-italic">Vous avez déjà un compte ?</a>
+  </div>
+  <div class="d-flex justify-content-between align-items-center">
+    <button class="btn btn-primary">Inscription</button>
+    <a class="btn btn-warning" href="{{ path('home')}}">Annuler</a>
+  </div>
+  {{ form_end(form )}}
   </div>
 {% endblock %}
+
