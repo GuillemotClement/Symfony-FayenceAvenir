@@ -5,7 +5,7 @@
     <div class="article-picture d-flex justify-content-center mb-5">
       {# <img class="img-fluid rounded shadow" src="https://images.unsplash.com/photo-1716033754000-fbf7dfefabda?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHx8" alt="image article {{article.title}}"> #}
     {# décommenter en prod #}
-      <img src="{{ asset(article.picture) }}" alt="image article {{article.title}}">
+      <img src="{{ asset(article.picture) }}" alt="image article {{article.title}}" class="img-fluid rounded shadow">
     </div>
     <h1 class="text-center mb-4">{{ article.title}}</h1>
     <div class="article-info">
