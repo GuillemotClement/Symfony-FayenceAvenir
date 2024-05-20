@@ -28,7 +28,8 @@
         {% endif %}
         <a href="{{ path('logout')}}" class="btn btn-sm btn-outline-light me-2">deconnexion</a>
         
-        <a href="{{ path('edit_user', {id: app.user.id}) }}" class="">
+        {# <a href="{{ path('edit_user', {id: app.user.id}) }}" class=""> #}
+        <a href="" class="">
         {# Décommenter appel vers la bdd pour ajout image en prod #}
           {# {# <img class="avatar" src="{{ asset(app.user.picture) }}" alt="profil">  #}
           <img class="rounded-circle avatar shadow hover-pic" src="https://randomuser.me/api/portraits/women/66.jpg" alt="profil">

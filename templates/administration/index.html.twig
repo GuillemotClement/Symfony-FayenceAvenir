@@ -1,22 +1,82 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1 class="text-center capitalize">Panneau administration</h1>
-	<div class="administration-edit">
-	<h2 class="center">Article</h2>
-	<div class="administration-list d-flex column">
-		{% for article in articles %}
-			<div class="administration-element mb20 flex align-center justify-between p20">
-				<div class="administration-element-content">
-					<p class="mr20 element-text">{{ article.title | slice(0, 60)}}...</p>
-					<p class="small">Ecrit le {{article.createdAt | date('d M Y')}} par <span class="author">{{ article.author.firstname }} {{ article.author.lastname }}</span></p>
-				</div>
-				<div class="administration-element-action  ">
-					<a class="btn btn-small btn-warning mr5" href="{{ path('article_edit', {id: article.id})}}">Editer</a>
+<h1 class="text-center capitalize my-4">Administration</h1>
+<div class="d-flex flex-column">
+	<div class="p-3">
+		<h2 class="">Articles</h2>
+		<div class="action my-3">
+			<a href="{{ path('article_new')}}" class="btn btn-small btn-primary">Ajouter</a>
+		</div>
+		<div class="d-flex flex-wrap gap-4 justify-content-around">
+			{% for article in articles %}
+			<div class="border p-3 col-12 col-md-3 white rounded shadow d-flex flex-column justify-content-between">
+				<p class="fs-4">{{ article.title | slice(0, 60)}}...</p>
+				<hr>
+				<p class="">Ecrit le {{article.createdAt | date('d M Y')}} par <span class="author">{{ article.author.firstname }} {{ article.author.lastname }}</span></p>
+				<div class="d-flex justify-content-between">
+					<a class="btn btn-small btn-warning mr5 txt-white" href="{{ path('article_edit', {id: article.id})}}">Editer</a>
 					<a class="btn btn-small btn-danger" href="{{ path('article_delete', {id: article.id})}}">Supprimer</a>
 				</div>
 			</div>
-{% endfor %}
+			{% endfor %}
+		</div>
+	</div>
+	<hr>
+	<div class="p-3">
+		<h2 class="">Evènements</h2>
+		<div class="action my-3">
+			<a href="{{ path('add_event')}}" class="btn btn-small btn-primary">Ajouter</a>
+		</div>
+		<div class="d-flex flex-wrap gap-4 justify-content-around">
+			{% for event in events %}
+				<div class="border p-3 col-12 col-md-3 white rounded shadow d-flex flex-column justify-content-between">
+					<p class="fs-4">{{ event.name | slice(0, 60)}}...</p>
+					<p class="small">Prévu le {{event.date | date('d M Y')}} à {{ event.adresse }}</span></p>
+					<div class="d-flex justify-content-between">
+						<a class="btn btn-small btn-warning mr5 txt-white" href="{{ path('edit_event', { id: event.id })}}">Editer</a>
+						<a class="btn btn-small btn-danger" href="{{ path('delete_event', {id: event.id}) }}">Supprimer</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% if is_granted('ROLE_ADMIN') %}
+		<hr>
+		<div class="p-3">
+			<h2 class="mb-3">Utilisateurs</h2>
+			<div class="d-flex flex-wrap gap-4 justify-content-around">
+				{% for user in users %}
+					<div class="border p-3 col-12 col-md-3 white rounded shadow d-flex flex-column justify-content-between">
+						<p class="text-capitalize fs-4 mb-1">{{ user.firstname }} {{ user.lastname }}</p>
+						<p class="fst-italic">{{ user.email }}</p>
+						<p class="underline mb-1">Rôle de l'utilisateur :</p>
+						<ul class="small d-flex flex-wrap gap-3 justify-content-between mb-3">
+							{% for role in user.roles %}
+								<li>{{role}}</li>
+								<div class="separator"></div>
+							{% endfor %}
+						</ul>
+						<div class="d-flex justify-content-between">
+							<a class="btn btn-small btn-warning mr5 txt-white" href="{{ path('add_role_user', {id: user.id})}}">Modifier</a>
+							<a class="btn btn-small btn-danger" href="{{ path('delete_user', { id: user.id })}}">Supprimer</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+	
+	
+</div>
+
+
+
+{# 
+	<div class="administration-edit">
+	<h2 class="center">Article</h2>
+	<div class="administration-list d-flex column">
+		 #}
 
 
 
