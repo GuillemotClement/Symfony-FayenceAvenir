@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-center mb-4">
       <img src="{{ asset(event.picture) }}" alt="image event {{event.name}}" class="img-fluid rounded shadow">
     </div>
-    <h1 class="text-center mb-4 text-capitalize">{{ event.name }}</h1>
+    <h1 class="text-center mb-4">{{ event.name }}</h1>
     <div class="px-3">
       <div class="element-info">
       <p class="element-date"><span class="fw-bold">Date de l'évènement</span> : {{ event.date | date('d M Y à h:m')}}</p>

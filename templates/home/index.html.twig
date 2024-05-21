@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  {% if not app.user %}
+  {# {% if not app.user %}
   {# <div class=""> #}
-    <div class="px-4 py-5 my-5 text-center">
+    {# <div class="px-4 py-5 my-5 text-center">
       <h1 class="display-5 fw-bold text-body-emphasis">Fayence Avenir</h1>
       <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">Fayence Avenir ambitionne à mobiliser les habitants de notre territoire, encourage l'expression collective et individuelle, et favorise les débats sur des enjeux locaux.</p>
@@ -13,10 +13,10 @@
         </div>
       </div>
     </div> 
-  {% endif %}
+  {% endif %} #} 
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
-    <h2 class="text-capitalize text-center my-3">Nos derniers articles</h2>
+    <h2 class="text-center my-3">Nos derniers articles</h2>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for article in articles %}
         <a href="{{ path('article_show', { id: article.id}) }}">
@@ -52,7 +52,7 @@
 
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
-    <h2 class="text-capitalize text-center my-3">Nos prochaines évènements</h2>
+    <h2 class="text-center my-3">Nos prochains évènements</h2>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for event in events %}
         <a href="{{ path('show_event', { id: event.id}) }}">

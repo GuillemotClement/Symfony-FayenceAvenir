@@ -14,9 +14,9 @@ class RulesController extends AbstractController
         return $this->render('rules/rgpd.html.twig');
     }
 
-    #[Route('statut', name: 'statut')]
+    #[Route('presentation', name: 'presentation')]
     public function showStatut(): Response
     {
-        return $this->render('rules/statut.html.twig');
+        return $this->render('rules/presentation.html.twig');
     }
 }
