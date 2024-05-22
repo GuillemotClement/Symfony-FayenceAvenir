@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="album py-5 bg-body-tertiary">
+<div class="album bg-body-tertiary py-3 my-3">
   <div class="container">
-  <h2 class="text-capitalize text-center my-4">Agenda</h2>
+  <h1 class="text-capitalize text-center my-4">Agenda</h1>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
       {% for event in events %}
       <a href="{{ path('show_event', { id: event.id}) }}">

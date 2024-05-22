@@ -38,7 +38,7 @@ class SecurityController extends AbstractController
         $userForm->handleRequest($request);
         if($userForm->isSubmitted() && $userForm->isValid()){
             // récupération de l'image envoyée par l'user depuis le formulaire
-            $picture = $userForm->get('pictureFile')->getData();
+            $picture = $userForm->get('pictureFile')->getData(); 
             // on vient utiliser le service pour la gestion de la picture
             $user->setPicture($uploader->uploadProfileImage($picture));
             //on récupère le paramètre de service

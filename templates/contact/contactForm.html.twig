@@ -1,5 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{{form(form)}}
+<div class="d-flex justify-content-center align-items-center m-5">
+  {{ form_start(form) }}
+    <h1 class="text-center mb-3">Nous contacter</h1>
+    {{form_rest(form)}}
+  {{form_end(form)}}
+</div>
 {% endblock %}
+
+
+
+        
+        
+          
+          {# <div class="form-row">
+            {{ form_label(form.date) }}
+            {{ form_widget(form.date) }}
+            {{ form_errors(form.date) }}
+          </div>
+          <div class="form-row">
+            {{ form_label(form.adresse) }}
+            {{ form_widget(form.adresse) }}
+            {{ form_errors(form.adresse) }}
+          </div>
+          <div class="form-row">
+            {{ form_label(form.content) }}
+            {{ form_widget(form.content) }}
+            {{ form_errors(form.content) }}
+          </div>
+          <div class="form-row">
+            {{ form_label(form.pictureFile) }}
+            {{ form_widget(form.pictureFile) }}
+            {{ form_errors(form.pictureFile) }}
+          </div>
+          <div class="form-action py-3 d-flex justify-content-between">
+            <button class="btn btn-primary">Valider</button>
+            <a class="btn btn-warning" href="{{ path('home')}}">Annuler</a>
+          </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div> #}
