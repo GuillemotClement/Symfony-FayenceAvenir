@@ -8,7 +8,7 @@
       {% for event in events %}
       <a href="{{ path('show_event', { id: event.id}) }}">
         <div class="card p-0 shadow card-height">
-          <img src="{{ asset('build/images/eventFayence.jpeg')}}" class="card-img-top" alt="image event {{ event.name }}">
+          <img src="{{ asset(event.picture) }}" alt="image event {{event.name}}" class="img-fluid rounded shadow">
           <div class="card-body d-flex flex-column justify-content-between">
             <h3 class="card-title">{{ event.name | title }}</h3>
             <hr>
