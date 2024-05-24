@@ -1,5 +1,4 @@
 framework:
   mailer:
     dsn: "%env(MAILER_DSN)%"
-    headers:
-      from: "FayenAvenir <contact@fayence-avenir.fr>"
+    

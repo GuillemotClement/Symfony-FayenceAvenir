@@ -5,7 +5,7 @@ namespace App\Controller;
 
 use App\Form\ContactType;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-// use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +31,7 @@ class ContactController extends AbstractController
            $email
                 ->context(['firstName' => $firstName, 'lastName' => $lastName, 'message' => $message])
                 ->from($emailContact)
-                ->to('contact@avenir-fayence.fr')
+                ->to('contact@fayence-avenir.fr')
                 ->subject('Message de ' . $firstName . ' ' . $lastName)
                 ->htmlTemplate('@email_templates/contact.html.twig')
                 ->text($message);

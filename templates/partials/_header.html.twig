@@ -32,7 +32,6 @@
         <a href="" class="">
         {# Décommenter appel vers la bdd pour ajout image en prod #}
           <img class="rounded-circle avatar shadow hover-pic" src="{{ asset(app.user.picture) }}" alt="profil">
-          {# <img class="rounded-circle avatar shadow hover-pic" src="https://randomuser.me/api/portraits/women/66.jpg" alt="profil"> #}
         </a>
       {% else %}
         <a href="{{ path('login')}}" class="btn btn-sm btn-outline-light me-3">Connexion</a>
