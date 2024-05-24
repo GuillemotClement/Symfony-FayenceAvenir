@@ -55,7 +55,6 @@
   padding-left: 25px;
 }
 
-
 .flash {
   padding: 20px;
   text-align: center;
@@ -68,4 +67,7 @@
 
 .flash-error {
   background-color: var(--warning);
+}
+.bold {
+  font-weight: 700;
 }

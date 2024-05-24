@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
@@ -23,6 +24,7 @@ class UserType extends AbstractType
             ->add('password', PasswordType::class, ['label' => 'Mot de passe *'])
             ->add('firstname', null, ['label' => 'Prénom *'])
             ->add('lastname', null, ['label' => 'Nom *'])
+            ->add('username', TextType::class, ['label' => 'Pseudo *'])
             ->add('pictureFile', FileType::class, [
                 //si user a une photo, alors le champ n'est pas obligatoire
                 'label'=> $user->getPicture() ? 'Image' : 'Image *',
@@ -39,9 +41,6 @@ class UserType extends AbstractType
                     )
                 ]
             ])
-
-
-
         ;
     }
 
