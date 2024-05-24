@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="">
+    <h1 class="my-5 text-center">Adhésion</h1>
+    <p>Êtes-vous prêt à faire partie d'une communauté dynamique et engagée ? Rejoignez l'Association Fayence-Avenir et contribuez à façonner l'avenir de notre belle région !</p>
+    <h4>Comment adhérer ?</h4>
+    <p>C'est simple ! Téléchargez notre formulaire d'adhésion disponible en cliquant sur le bouton, imprimez-le, remplissez-le et envoyez-le nous par courrier à l'adresse indiqué sur le formulaire</p>
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-primary text-center" href="{{ asset('build/pdf/adhesion.pdf')}}" target="_blank">Adhésion</a>
+    </div>
+</div>
+
+{% endblock %}

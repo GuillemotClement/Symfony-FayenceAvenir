@@ -20,6 +20,9 @@
         <li class="nav-item">
           <a href="{{ path('contact') }}" class="nav-link txt-white">Nous contacter</a>
         </li>
+        <li class="nav-item">
+          <a href="{{ path('membership') }}" class="nav-link txt-white">Adhérer</a>
+        </li>
       </ul>
       <div class="d-flex align-items-center justify-content-center">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -29,10 +32,10 @@
         <a href="{{ path('logout')}}" class="btn btn-sm btn-outline-light me-2">deconnexion</a>
         
         {# <a href="{{ path('edit_user', {id: app.user.id}) }}" class=""> #}
-        <a href="" class="">
+        {# <a href="" class=""> #}
         {# Décommenter appel vers la bdd pour ajout image en prod #}
-          <img class="rounded-circle avatar shadow hover-pic" src="{{ asset(app.user.picture) }}" alt="profil">
-        </a>
+          {# <img class="rounded-circle avatar shadow hover-pic" src="{{ asset(app.user.picture) }}" alt="profil">
+        </a> #}
       {% else %}
         <a href="{{ path('login')}}" class="btn btn-sm btn-outline-light me-3">Connexion</a>
         <a href="{{ path('register')}}" class="btn btn-sm btn-outline-light">Inscription</a>
