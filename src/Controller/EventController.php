@@ -23,27 +23,27 @@ class EventController extends AbstractController
         $user = $this->getUser();
         $events = $eventRepo->findAll();
 
-        $formatter = new IntlDateFormatter(
-            'fr_FR',
-            IntlDateFormatter::FULL,
-            IntlDateFormatter::SHORT
-        );
+        // $formatter = new IntlDateFormatter(
+        //     'fr_FR',
+        //     IntlDateFormatter::FULL,
+        //     IntlDateFormatter::SHORT
+        // );
 
-        $formatter->setPattern('EEEE d MMMM y H:mm');
+        // $formatter->setPattern('EEEE d MMMM y H:mm');
 
-        $formattedEvents = [];
-        foreach ($events as $event) {
-            $formattedEvents[] = [
-                'event' => $event,
-                'formattedDate' => $formatter->format($event->getDate())
-            ];
-        }
+        // $formattedEvents = [];
+        // foreach ($events as $event) {
+        //     $formattedEvents[] = [
+        //         'event' => $event,
+        //         'formattedDate' => $formatter->format($event->getDate())
+        //     ];
+        // }
 
 
 
         return $this->render('event/index.html.twig', [
             'events' => $events,
-            'formattedEvents' => $formattedEvents,
+            // 'formattedEvents' => $formattedEvents,
             'user' => $user
         ]);
     }
@@ -104,19 +104,19 @@ class EventController extends AbstractController
     {
         $event = $eventRepo->find($id);
 
-        $formatter = new IntlDateFormatter(
-            'fr_FR',
-            IntlDateFormatter::FULL,
-            IntlDateFormatter::SHORT
-        );
-        $formatter->setPattern('EEEE d MMMM y H:mm');
+        // $formatter = new IntlDateFormatter(
+        //     'fr_FR',
+        //     IntlDateFormatter::FULL,
+        //     IntlDateFormatter::SHORT
+        // );
+        // $formatter->setPattern('EEEE d MMMM y H:mm');
 
-        $formattedDate = $formatter->format($event->getDate());
+        // $formattedDate = $formatter->format($event->getDate());
 
 
         return $this->render('event/show.html.twig', [
             'event' => $event,
-            'date' => $formattedDate
+            // 'date' => $formattedDate
         ]);
     }
 

@@ -8,7 +8,7 @@
     <h1 class="text-center mb-4">{{ event.name | title }}</h1>
     <div class="px-3">
       <div class="element-info">
-      <p class="element-date"><span class="fw-bold">Date de l'évènement</span> : {{ event.date | date | format_datetime('full', 'short', locale='fr')}}</p>
+      <p class="element-date"><span class="fw-bold">Date de l'évènement</span> : {{ event.date | date('d F Y H:i')}}</p>
       <p class="element-adress"><span class="fw-bold">Adresse de l'évènement</span> : {{ event.adresse}}</p>
     </div>
     <hr class="mb-1">

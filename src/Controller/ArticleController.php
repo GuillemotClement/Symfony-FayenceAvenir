@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Carbon\Carbon;
 
 class ArticleController extends AbstractController
 {
@@ -24,6 +25,12 @@ class ArticleController extends AbstractController
         $user = $this->getUser();
         // requête qui permet de récupérer les article du plus récent au plus vieux
         $articles = $articlesRepo->getArticleByDescCreated();   
+
+        Carbon::setLocale('fr');
+
+        foreach ($articles as $article) {
+            $article->formattedDate = Carbon::parse($article->getCreatedAt())->translatedFormat('l d F Y H:i');
+        }
         
         return $this->render('article/index.html.twig', [
             'articles' => $articles,

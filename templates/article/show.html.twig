@@ -9,7 +9,7 @@
     </div>
     <h1 class="text-center mb-4">{{ article.title | title}}</h1>
     <div class="article-info">
-      <p class="article-date small">Ecrit le <span class="fst-italic">{{ article.createdAt | date | format_datetime('full', 'short', locale='fr')}}</span> par <span class="author">{{article.author.firstname}} {{article.author.firstname}}</span></p>
+      <p class="article-date small">Ecrit le <span class="fst-italic">{{ article.createdAt | date('d F Y H:i')}}</span> par <span class="author">{{article.author.firstname}} {{article.author.firstname}}</span></p>
     </div>
     <hr>
     <p class="article-text mb-5">{{ article.content | nl2br }}</p>
@@ -29,7 +29,7 @@
           <div class="comment rounded mb-3 p-3">
             <div class="comment-info d-flex justify-content-between align-items-center">
               <p class="">Commentaire de <span class="author">{{comment.author.firstname}} {{comment.author.lastname}}</span></p>
-              <p class="small">Posté le {{ comment.createdAt | date | format_datetime('full', 'short', locale='fr')}}</p>
+              <p class="small">Posté le {{ comment.createdAt | date('d M Y h:mm')}}</p>
             </div>
             <hr class="m-0 mb-2">
             <p class="comment-content">{{ comment.content }}</p>

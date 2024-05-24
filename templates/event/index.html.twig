@@ -14,7 +14,7 @@
             <hr>
             <div class="">
               <p class="fs-6 fw-light">Adresse : {{ event.adresse }}</p>
-              <p class="fs-6 fw-light">Le {{ event.date | date | format_datetime('full', 'short', locale='fr')}}</p>
+              <p class="fs-6 fw-light">Le {{ event.date | date('d M Y h:mm')}}</p>
             </div>
             <hr>
             <p class="card-text">{{ event.content | slice(0, 100) }}...</p>
