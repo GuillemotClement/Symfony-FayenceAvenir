@@ -5,10 +5,10 @@
     <div class="d-flex justify-content-center mb-4">
       <img src="{{ asset(event.picture) }}" alt="image event {{event.name}}" class="img-fluid rounded shadow">
     </div>
-    <h1 class="text-center mb-4">{{ event.name }}</h1>
+    <h1 class="text-center mb-4">{{ event.name | title }}</h1>
     <div class="px-3">
       <div class="element-info">
-      <p class="element-date"><span class="fw-bold">Date de l'évènement</span> : {{ event.date | date('d M Y à h:m')}}</p>
+      <p class="element-date"><span class="fw-bold">Date de l'évènement</span> : {{ event.date | date | format_datetime('full', 'short', locale='fr')}}</p>
       <p class="element-adress"><span class="fw-bold">Adresse de l'évènement</span> : {{ event.adresse}}</p>
     </div>
     <hr class="mb-1">
@@ -16,7 +16,6 @@
       <p class="text-break">{{event.content | nl2br }}</p>
     </div>
     </div>
-    
   </div>
 {% endblock %}
 

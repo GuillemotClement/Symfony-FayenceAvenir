@@ -7,6 +7,7 @@ use App\Form\EventType;
 use App\Service\Uploader;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use IntlDateFormatter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -21,8 +22,28 @@ class EventController extends AbstractController
     {
         $user = $this->getUser();
         $events = $eventRepo->findAll();
+
+        $formatter = new IntlDateFormatter(
+            'fr_FR',
+            IntlDateFormatter::FULL,
+            IntlDateFormatter::SHORT
+        );
+
+        $formatter->setPattern('EEEE d MMMM y H:mm');
+
+        $formattedEvents = [];
+        foreach ($events as $event) {
+            $formattedEvents[] = [
+                'event' => $event,
+                'formattedDate' => $formatter->format($event->getDate())
+            ];
+        }
+
+
+
         return $this->render('event/index.html.twig', [
             'events' => $events,
+            'formattedEvents' => $formattedEvents,
             'user' => $user
         ]);
     }
@@ -82,8 +103,20 @@ class EventController extends AbstractController
     public function showEvent(?string $id, EventRepository $eventRepo)
     {
         $event = $eventRepo->find($id);
+
+        $formatter = new IntlDateFormatter(
+            'fr_FR',
+            IntlDateFormatter::FULL,
+            IntlDateFormatter::SHORT
+        );
+        $formatter->setPattern('EEEE d MMMM y H:mm');
+
+        $formattedDate = $formatter->format($event->getDate());
+
+
         return $this->render('event/show.html.twig', [
-            'event' => $event
+            'event' => $event,
+            'date' => $formattedDate
         ]);
     }
 

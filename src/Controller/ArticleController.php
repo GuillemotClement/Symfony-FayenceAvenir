@@ -24,6 +24,7 @@ class ArticleController extends AbstractController
         $user = $this->getUser();
         // requête qui permet de récupérer les article du plus récent au plus vieux
         $articles = $articlesRepo->getArticleByDescCreated();   
+        
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
             'user' => $user
