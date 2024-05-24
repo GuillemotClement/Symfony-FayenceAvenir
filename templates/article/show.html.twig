@@ -9,7 +9,7 @@
     </div>
     <h1 class="text-center mb-4">{{ article.title | title}}</h1>
     <div class="article-info">
-      <p class="article-date small">Ecrit le <span class="fst-italic">{{ article.createdAt | date('d F Y H:i')}}</span> par <span class="author">{{article.author.firstname}} {{article.author.firstname}}</span></p>
+      <p class="article-date small">Ecrit le <span class="fst-italic">{{ article.createdAt | date('d F Y H:i')}}</span> par <span class="author">{{article.author.username}}</span></p>
     </div>
     <hr>
     <p class="article-text mb-5">{{ article.content | nl2br }}</p>
